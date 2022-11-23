@@ -9,14 +9,12 @@
     <title>Blok BG</title>
 </head>
 <body>
-
-{#    <h1>Header</h1>#}
     {% include 'partials/header-private.html' %}
 <div class="container">
         {% block page-content %}
     {% endblock %}
 </div>
-
 {% include 'partials/footer.html' %}
+<script src="{% static 'scripts/app.js' %}" type="module"></script>
 </body>
 </html>
