@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'common',
     'accounts',
+    'home',
 ]
 
 MIDDLEWARE = [
