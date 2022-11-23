@@ -8,10 +8,14 @@
     <title>Blok BG</title>
 </head>
 <body>
+
 {#    <h1>Header</h1>#}
     {% include 'partials/header-public.html' %}
-    {% block page-content %}
+<div class="container">
+        {% block page-content %}
     {% endblock %}
+</div>
+
 {% include 'partials/footer.html' %}
 </body>
 </html>

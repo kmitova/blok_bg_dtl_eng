@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-REGISTER NORMAL
-</body>
-</html>
+{% extends 'partials/base-public.html' %}
+
+{% load static %}
+
+{% block page-content %}
+    <div class="form-container">
+
+    <h1 class="accounts-form-title">Sign Up</h1>
+    <form action="" class="account-form login-form">
+        <div class="form-field">
+            <input type="text" id="first-name" placeholder="First name" required>
+        </div>
+    <div class="form-field">
+            <input type="text" id="last-name" placeholder="Last name" required>
+        </div>
+    <div class="form-field">
+            <input type="text" id="username" placeholder="Username" required>
+        </div>
+    <div class="form-field">
+            <input type="email" id="email" placeholder="Email" required>
+        </div>
+    <div class="form-field">
+            <input type="number" id="building-code" placeholder="Building code" required>
+        </div>
+    <div class="form-field">
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+    <div class="form-field">
+            <input type="password" id="re_password" placeholder="Confirm password" required>
+        </div>
+        <div class="submit-btn-container">
+                <button type="submit" class="accounts-form-btn register-btn">Sign Up</button>
+
+        </div>
+    </form>
+    <div class="link-for-admin-accounts">
+        <a href="{% url 'register admin' %}">Sign Up for Admins</a>
+    </div>
+    </div>
+{% endblock %}
