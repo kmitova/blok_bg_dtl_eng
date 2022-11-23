@@ -3,8 +3,8 @@
 @import './header.css';
 @import './login-register-form.css';
 @import './footer.css';
-/*@import './make-post.css'; */
-/*@import './dashboard.css';*/
+@import './make-post.css';
+@import './dashboard.css';
 /*@import './post.css'; */
 /*@import './profile.css';*/
 /*@import './verify-before-editing.css'; */
@@ -25,15 +25,18 @@
 body {
   font-family: 'Montserrat', sans-serif;
     position: relative;
-  min-height: 100vh;
+    min-height: 100vh;
 
 }
 
 .container {
+    margin-top: 0;
     display: flex;
     border: 2px solid blue;
     padding-bottom: 9em;
     padding-top: 0;
+    /*margin-bottom: 5em;*/
+    width: 100vw;
     /*height: 100vh;*/
 }
 

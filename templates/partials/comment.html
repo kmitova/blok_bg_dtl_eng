@@ -1,0 +1,32 @@
+<div class="comment">
+      <div class="comment-info">
+        <div class="user-img">
+          <AccountCircleIcon fontSize="small" />
+        </div>
+        <div class="comment-user-and-date">
+          <p class="comment-author">Jane Doe</p>
+          <p class="comment-date">11/11/22 at 14:18pm</p>
+        </div>
+      </div>
+      <div class="comment-content">
+        <p class="comment-text">this is a comment. more text here.</p>
+        <div class="replies-container" >
+          <p class="reples-count">
+            <a href="" class="replies-link" onClick={handleClickReplies}>
+              {!repliesAreShown ? "1 reply" : "Hide replies"}
+            </a>
+          </p>
+          {repliesAreShown && <Reply />}
+          <Button
+            variant="outlined"
+
+
+          >
+            {!showReplyForm ? 'Reply': 'Hide'}
+          </Button>
+          {showReplyForm && (
+            <ReplyForm />
+          )}
+        </div>
+      </div>
+    </div>

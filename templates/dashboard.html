@@ -3,5 +3,76 @@
 {% load static %}
 
 {% block page-content %}
-<h1>Dashboard</h1>
+    <main>
+        <div class='empty'></div>
+        <div class="posts">
+            <div class='make-post-container'>
+                <form action="" class="form post-form">
+                    <textarea id="outlined-basic" placeholder="Make a post..."></textarea>
+                    <div class="post-actions">
+                        <button class='upload-btn'>Image</button>
+                        <button type='submit' class="submit-post-btn">Post</button>
+                    </div>
+                </form>
+            </div>
+            <div class="post-container">
+                <div class="post-info">
+                    <div class="user-img">
+                        <i class="fa-solid fa-user fa-2x"></i>
+                    </div>
+                    <div class="post-user-and-date">
+                        <p class="post-author">John Doe</p>
+                        <p class="post-date">11/11/22 at 12:43pm</p>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p class="post-text">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem,
+                        officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+                        placeat labore autem commodi ducimus velit voluptatibus! Quos et fuga
+                        voluptate.
+                    </p>
+                </div>
+                <div class="images-container">
+                    <img class="post-img"
+                            src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                            alt="sample photo"
+                    />
+
+                </div>
+                <div class="support-btn-and-comments-count">
+                    <div class="support-btn">
+                            <i class="fa-solid fa-thumbs-up fa-lg thumb-icon"><a href=""></a></i>
+                        <span class="times-supported">4</span>
+                    </div>
+                    <p class="comments-count" onClick={handleClickComments}>
+                        <a href="">
+                            <span class="comments-num">2</span> comments
+                        </a>
+                    </p>
+                </div>
+                <div class="comments-container">
+
+                    <div class="comments">
+{#                        {% include "partials/comment.html"%}#}
+                    </div>
+
+                </div>
+                <div class="make-comment-container">
+                    <form action="" >
+                        <input placeholder="Add a comment..."/>
+                        <div class="post-actions">
+                            <button class="make-comment-btn">
+                                Post
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {#        <Post />#}
+            {#        <Post />#}
+        </div>
+        {#      <UsersList />#}
+
+    </main>
 {% endblock %}

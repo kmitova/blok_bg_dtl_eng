@@ -1,0 +1,244 @@
+main {
+  /*margin-left: 1em;*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*justify-content: center;*/
+  height: 100vh;
+  margin-bottom: 5em;
+  /*width: 100vw;*/
+  /*padding-top: 5em;*/
+  /*margin-left: 0;*/
+  /*padding-bottom: 5em;*/
+  /*display: grid;*/
+  /*grid-template-columns: repeat(3, 1fr);*/
+  /*gap: 10px;*/
+  /*margin-top: 70%;*/
+  /*grid-auto-rows: minmax(100px, auto);*/
+}
+
+.empty {
+  /*grid-column: 1/2;*/
+  background-color: azure;
+  width: 500px;
+}
+
+
+.posts {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 500px;
+  /*grid-column: 2 / 3;*/
+}
+
+.make-post-container {
+  border: 2px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-form {
+  border: 1px solid black;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  /*justify-content:center;*/
+
+}
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  gap: 1em;
+}
+
+.post-form textarea {
+  width:30em;
+  height: 6em;
+  text-align: center;
+  /*margin: auto;*/
+  resize: none;
+  font-family: 'Montserrat', sans-serif;
+  padding: .2em;
+  border-radius: 5px;
+    border: 2px solid #d1d5db;
+}
+
+
+.submit-post-btn, .upload-btn {
+   /*margin-top: 1em;*/
+
+    color: white;
+    background-color: #22c55e;
+    border: none;
+    width: 4.2em;
+    height: 3em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.upload-btn {
+  padding-left: .5em;
+  background-color: #0ea5e9;
+}
+
+.post-img {
+  width: 100%
+}
+
+.post-container {
+  border: 2px solid green;
+  color: #52525b;
+}
+.post-info {
+  display: flex;
+  gap: .3em;
+  align-items: center;
+  margin: 1em;
+}
+.post-user-and-date {
+
+}
+
+.post-author {
+  font-weight: bold;
+  margin-bottom: .2em;
+}
+
+.post-date {
+  font-style: italic;
+  font-size: small;
+}
+
+.post-content {
+  margin: 1em;
+}
+
+.thumb-icon {
+  cursor: pointer;
+}
+
+.support-btn-and-comments-count {
+  margin:.3em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #52525b;
+}
+
+.comments-count a {
+  color: #52525b;
+  text-decoration: none;
+}
+.comments-count a:hover {
+  color: #52525b;
+  text-decoration: underline;
+}
+
+.make-comment-container form{
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  margin: 1em;
+}
+
+.make-comment-container input {
+  /*border: 1px solid blue;*/
+  width: 100%;
+  text-indent: .4em;
+    border-radius: 5px;
+    border: 2px solid #d1d5db;
+ height: 3em;
+}
+
+.make-comment-btn {
+  position: absolute;
+  right:10px;
+  bottom: 11px;
+  border: none;
+  background-color: white;
+  box-shadow: none;
+  font-weight: bold
+}
+
+.user-list-container {
+  position: relative;
+  padding-left: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  right: 5%;
+}
+
+.user-group {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  grid-column: 3/4;
+  border-left: 2px solid rgba(163, 163, 163, .5);
+}
+
+.hamburger-menu {
+  border: 0;
+  height: 30px;
+  width: 30px;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: #22c55e;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  position: absolute;
+  bottom: 70%;
+  right: 0;
+  transform: translateY(-50%);
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .post-form {
+    width: 90%;
+  }
+}
+
+@media (max-width: 1100px) {
+  main {
+    /*margin-top: 180%;*/
+    display: flex;
+    flex-direction:column;
+  }
+  .empty {
+    display: none;
+  }
+  .hamburger-menu {
+    display: block;
+  }
+  #expanded {
+    display: block;
+  }
+  .user-group {
+    position: relative;
+    top: 30px;
+    /* left: 0; */
+    right: 50%;
+    /* flex-direction: column; */
+    width: 100%;
+    height: calc(100vh - 77px);
+    background-color: white;
+    border-top: 1px solid black;
+    z-index: 10;
+    display: none;
+  }
+  .user-list-item {
+    text-align: center;
+    margin: 0;
+  }
+}
