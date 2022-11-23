@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+@import './header.css';
+/*@import './login-form.css';*/
+@import './footer.css';
+/*@import './make-post.css'; */
+/*@import './dashboard.css';*/
+/*@import './post.css'; */
+/*@import './profile.css';*/
+/*@import './verify-before-editing.css'; */
+/*@import './edit-profile.css';*/
+/*@import './verify-before-deleting.css';*/
+/*@import './payment.css';*/
+/*@import './notifications.css';*/
+/*@import './page404.css';*/
+/*@import './inbox.css';*/
+/*@import './chat.css';*/
+
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+    position: relative;
+  min-height: 100vh;
+}

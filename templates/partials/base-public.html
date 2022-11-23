@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static '/css/index.css' %}">
+    <title>Blok BG</title>
+</head>
+<body>
+{#    <h1>Header</h1>#}
+    {% include 'partials/header-public.html' %}
+    {% block page-content %}
+    {% endblock %}
+{% include 'partials/footer.html' %}
+</body>
+</html>

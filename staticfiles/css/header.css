@@ -1,0 +1,18 @@
+/* HEADER */
+
+.header {
+  padding: 2em;
+  background-color: #22c55e;
+  margin-bottom: 3em;
+}
+
+h3 {
+  color: white;
+}
+
+.title-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .4em;
+}
