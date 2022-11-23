@@ -1,7 +1,9 @@
+{% load static %}
+
 <div class="comment">
       <div class="comment-info">
         <div class="user-img">
-          <AccountCircleIcon fontSize="small" />
+          <i class="fa-solid fa-user fa-lg"></i>
         </div>
         <div class="comment-user-and-date">
           <p class="comment-author">Jane Doe</p>
@@ -9,24 +11,46 @@
         </div>
       </div>
       <div class="comment-content">
-        <p class="comment-text">this is a comment. more text here.</p>
+        <p class="comment-text">This is a comment. more text here.</p>
         <div class="replies-container" >
-          <p class="reples-count">
+          <p class="replies-count">
             <a href="" class="replies-link" onClick={handleClickReplies}>
-              {!repliesAreShown ? "1 reply" : "Hide replies"}
+              Show replies
+            </a>
+              <a href="" class="replies-link" onClick={handleClickReplies}>
+              Reply
             </a>
           </p>
-          {repliesAreShown && <Reply />}
-          <Button
-            variant="outlined"
+            <form
+              action=""
+              class="reply-form"
+            >
+              <input
+                placeholder="Add a reply..."
 
+              />
+              <div class="post-actions">
+                <button class="reply-form-btn"
+                >
+                  Post
+                </button>
+              </div>
+            </form>
 
-          >
-            {!showReplyForm ? 'Reply': 'Hide'}
-          </Button>
-          {showReplyForm && (
-            <ReplyForm />
-          )}
+            <div class="reply">
+
+                <div class="reply-info">
+
+                    <div class="user-img">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="reply-user-and-date">
+                        <p class="reply-author">Jane Doe</p>
+                         <p class="reply-date">11/11/22 at 14:18pm</p>
+                                </div>
+                          </div>
+                <div class="reply-content">this is a reply to the comment above.</div>
+                 </div>
         </div>
       </div>
     </div>

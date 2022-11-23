@@ -1,26 +1,22 @@
 main {
   /*margin-left: 1em;*/
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   /*justify-content: center;*/
-  height: 100vh;
-  margin-bottom: 5em;
-  /*width: 100vw;*/
-  /*padding-top: 5em;*/
-  /*margin-left: 0;*/
-  /*padding-bottom: 5em;*/
-  /*display: grid;*/
-  /*grid-template-columns: repeat(3, 1fr);*/
-  /*gap: 10px;*/
-  /*margin-top: 70%;*/
-  /*grid-auto-rows: minmax(100px, auto);*/
+  height: 90vh;
+  margin-bottom: 7em;
+  margin-top: 7em;
 }
 
 .empty {
-  /*grid-column: 1/2;*/
   background-color: azure;
-  width: 500px;
+  width: 400px;
+  height: 150vh;
+  margin: 0;
+  padding: 0;
+  border: 2px solid red;
+  z-index: -10;
 }
 
 
@@ -30,7 +26,7 @@ main {
   flex-direction: column;
   gap: 1em;
   width: 500px;
-  /*grid-column: 2 / 3;*/
+
 }
 
 .make-post-container {
@@ -168,6 +164,80 @@ main {
   font-weight: bold
 }
 
+.comment {
+  margin: 1em;
+  background-color: #d1d5db;
+  padding: .5em .3em;
+}
+
+.comment-info, .reply-info {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid blue;
+  align-items: center;
+  gap: .2em;
+
+}
+
+.comment-author, .reply-author {
+  font-size:small;
+}
+
+.comment-date, .reply-date{
+  font-size: .6rem;
+}
+
+.comment-content, .reply-content {
+  margin: .2em 1em;
+  font-size: .9rem;
+}
+
+.replies-link {
+  color: #22c55e;
+  text-decoration: none;
+  font-size: small;
+  text-align: center;
+}
+
+.reply {
+  background-color: white;
+  margin: .5em;
+  border: 1px solid red;
+}
+
+.reply-form {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.reply-form input {
+    width: 100%;
+  text-indent: .4em;
+    border-radius: 5px;
+    border: 2px solid #d1d5db;
+ height: 3em;
+  margin-bottom: .6em;
+}
+
+.reply-form-btn {
+    position: absolute;
+  right:10px;
+  bottom: 18px;
+  border: none;
+  background-color: white;
+  box-shadow: none;
+  font-weight: bold
+}
+
+
+.replies-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+
 .user-list-container {
   position: relative;
   padding-left: 1em;
@@ -214,6 +284,8 @@ main {
     /*margin-top: 180%;*/
     display: flex;
     flex-direction:column;
+    margin-top: 1em;
+    margin-bottom: 100%;
   }
   .empty {
     display: none;
