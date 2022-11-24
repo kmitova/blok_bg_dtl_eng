@@ -1,3 +1,4 @@
+{% load static %}
 <header class='header header-private'>
     <div class="left-side">
         <div class='title-logo'><h3>BLOK <span>66</span></h3>
@@ -10,9 +11,30 @@
         </form>
     </div>
     <div class="right-side">
-    {#  TODO: add javascript and display profile submenu/ hide menu on small screens#}
+
+        <div class="profile-icons">
+              {#  TODO: add javascript and display profile submenu/ hide menu on small screens#}
         <i class="fa-solid fa-message fa-lg menu-icon"><a href="/"></a></i>
         <i class="fa-solid fa-bell fa-lg menu-icon"><a href=""></a></i>
-        <i class="fa-solid fa-user fa-lg menu-icon"><a href=""></a></i>
+        <i class="fa-solid fa-user fa-lg menu-icon" id="profile-icon"><a href=""></a></i>
+        </div>
+{#        <div class="profile-choices" id="profile-choices">#}
+{#            <ul>#}
+{#                <li><a href="">Profile</a></li>#}
+{#                <li><a href="">Make Announcement</a></li>#}
+{#                <li><a href="">Logout</a></li>#}
+{#            </ul>#}
+{#        </div>#}
     </div>
 </header>
+<div class="profile-choices" id="profile-choices">
+    <i class="fa-regular fa-xmark" id="profile-menu-close"></i>
+            <ul>
+                <li><a href="">Profile</a></li>
+                <li><a href="">Make Announcement</a></li>
+                <li><a href="">Logout</a></li>
+            </ul>
+        </div>
+{#{% block script %}#}
+{#    <script src="{% static 'scripts/app.js' %}" type="text/javascript"></script>#}
+{#{% endblock %}#}

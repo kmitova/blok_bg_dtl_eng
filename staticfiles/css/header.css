@@ -5,6 +5,7 @@
   background-color: #22c55e;
   margin-bottom: 3em;
   color: white;
+  position: relative;
 }
 
 .title-logo {
@@ -42,6 +43,13 @@ h3 {
 }
 
 .right-side {
+  gap: 4em;
+  border: 1px solid blue;
+}
+
+.profile-icons {
+  display: flex;
+  justify-content:center;
   gap: 2em;
 }
 .search-form {
@@ -70,5 +78,37 @@ h3 {
 
 .menu-icon {
   cursor: pointer;
+}
+
+.profile-choices {
+  border: 2px solid red;
+  display: none;
+  background-color: white;
+  padding: .9em;
+  border-radius: 5px;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+
+}
+
+.profile-choices i {
+  /*border: 2px solid blue;*/
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  cursor: pointer;
+
+}
+.profile-choices ul {
+  list-style: none;
+}
+
+.profile-choices a {
+  text-decoration: none;
+  color: #52525b;
+}
+
+@media (max-width: 1000px) {
 
 }
