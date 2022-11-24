@@ -40,11 +40,18 @@ h3 {
 
 .left-side {
   gap: 1em;
+
 }
 
 .right-side {
   gap: 4em;
   border: 1px solid blue;
+  position: relative;
+
+}
+
+#header-hamburger-menu {
+  display: none;
 }
 
 .profile-icons {
@@ -80,6 +87,13 @@ h3 {
   cursor: pointer;
 }
 
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+
+}
+
 .profile-choices {
   border: 2px solid red;
   display: none;
@@ -109,6 +123,59 @@ h3 {
   color: #52525b;
 }
 
+#close-icons-menu {
+  display: none;
+}
+
 @media (max-width: 1000px) {
+  #header-hamburger-menu {
+    display: block;
+    cursor: pointer;
+  }
+
+  #bell-icon, #profile-icon, #message-icon {
+    /*position: absolute;*/
+    background-color: white;
+    /*top: 60px;*/
+    /*display: none;*/
+  }
+
+  .icons {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2em;
+    background-color: blue;
+    padding: 3em;
+    position: absolute;
+    width: 5em;
+    right: 5px;
+    top: 45px;
+    border-radius: 5px;
+
+
+  }
+
+  #close-icons-menu {
+    display: block;
+    cursor: pointer;
+}
+
+  /*#message-icon {*/
+  /*  top: 60px;*/
+  /*}*/
+
+  /*#message-icon {*/
+  /*  top: 60px;*/
+  /*}*/
+
+  /*#bell-icon {*/
+  /*  top: 40px;*/
+  /*}*/
+
+  /*#profile-icon {*/
+  /*  top: 20px;*/
+  /*}*/
 
 }

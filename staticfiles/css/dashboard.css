@@ -3,10 +3,12 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /*justify-content: center;*/
+
+  justify-content: center;
   height: 90vh;
   margin-bottom: 7em;
   margin-top: 7em;
+  position: relative;
 }
 
 .empty {
@@ -25,7 +27,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  width: 500px;
+  width: 550px;
+  border: 2px solid pink;
 
 }
 
@@ -256,6 +259,42 @@ main {
   border-left: 2px solid rgba(163, 163, 163, .5);
 }
 
+.users-list {
+  border: 2px solid red;
+  background-color: red;
+  height: 100%;
+  margin-left: 7em;
+  /*position: absolute;*/
+  /*top: 50px;*/
+  /*margin: auto;*/
+  /*width: 30%;*/
+}
+
+.user-name-picture {
+  cursor: pointer;
+  display: flex;
+  gap: .5em;
+  align-items: center;
+}
+
+.users-list ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+}
+
+.users-list li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center;
+  border: 1px solid black;
+  width: 100%;
+  gap: 2em;
+  margin-top: 1em;
+}
+
 .hamburger-menu {
   border: 0;
   height: 30px;
@@ -271,6 +310,27 @@ main {
   right: 0;
   transform: translateY(-50%);
   display: none;
+}
+
+#users-btn {
+  position: fixed;
+  top: 300px;
+  right: 0;
+  display: none;
+}
+
+@media (max-width:1400px) {
+  .users-list {
+    /*display: none;*/
+    /*position: absolute;*/
+    /*right: 500px;*/
+    z-index: 10;
+    margin: auto;
+  }
+
+  #users-btn {
+    display: block;
+  }
 }
 
 @media (max-width: 800px) {

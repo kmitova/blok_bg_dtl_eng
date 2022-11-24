@@ -13,10 +13,16 @@
     <div class="right-side">
 
         <div class="profile-icons">
-              {#  TODO: add javascript and display profile submenu/ hide menu on small screens#}
-        <i class="fa-solid fa-message fa-lg menu-icon"><a href="/"></a></i>
-        <i class="fa-solid fa-bell fa-lg menu-icon"><a href=""></a></i>
+            <div class="icons" id="icons">
+                <i class="fa-regular fa-xmark" id="close-icons-menu"></i>
+                <i class="fa-solid fa-message fa-lg menu-icon" id="message-icon"><a href="/"></a></i>
+        <i class="fa-solid fa-bell fa-lg menu-icon" id="bell-icon"><a href=""></a></i>
         <i class="fa-solid fa-user fa-lg menu-icon" id="profile-icon"><a href=""></a></i>
+
+            </div>
+              {#  TODO: add javascript and display profile submenu/ hide menu on small screens#}
+
+            <i class="fa-solid fa-bars fa-lg" id="header-hamburger-menu"></i>
         </div>
 {#        <div class="profile-choices" id="profile-choices">#}
 {#            <ul>#}
