@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static '/css/index.css' %}">
+        <script src="https://kit.fontawesome.com/6f7fe3d018.js" crossorigin="anonymous"></script>
+    <title>Blok BG</title>
+</head>
+<body>
+
+{#    <h1>Header</h1>#}
+    {% include 'partials/header-public.html' %}
+<div class="container">
+        {% block page-content %}
+            <div class="container-404">
+        <div class="left-side">
+          <div class="error-name">404 Page Not Found</div>
+          <h1 class="404-title">Ugh oh, something went wrong.</h1>
+        </div>
+      <div class="right-side">
+        <img src='' alt="" class="error-img" />
+      <a href="{% url 'landing page' %}" class="return-link">Return to Landing Page</a>
+      </div>
+
+  </div>
+    {% endblock %}
+</div>
+
+{% include 'partials/footer.html' %}
+<script src="{% static 'scripts/app.js' %}">
+
+</script>
+</body>
+</html>

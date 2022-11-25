@@ -12,7 +12,7 @@
 @import './verify-profile.css';
 @import './payment.css';
 @import './notifications.css';
-/*@import './page404.css';*/
+@import './404.css';
 @import './inbox.css';
 @import './chat.css';
 
