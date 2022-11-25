@@ -15,3 +15,15 @@ def register_admin(request):
 
 def login_admin(request):
     return render(request, 'accounts/login-admin.html')
+
+
+def profile_page(request):
+    return render(request, 'accounts/profile-page.html')
+
+
+def edit_profile_page(request):
+    return render(request, 'accounts/edit-profile.html')
+
+
+def delete_profile_page(request):
+    return render(request, 'accounts/verify-page.html')

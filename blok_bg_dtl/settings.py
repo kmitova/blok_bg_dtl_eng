@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'common',
     'accounts',
     'home',
+    'dmmessages',
+    'payment',
 ]
 
 MIDDLEWARE = [

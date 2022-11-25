@@ -6,15 +6,15 @@
 @import './make-post.css';
 @import './dashboard.css';
 /*@import './post.css'; */
-/*@import './profile.css';*/
+@import './profile.css';
 /*@import './verify-before-editing.css'; */
-/*@import './edit-profile.css';*/
-/*@import './verify-before-deleting.css';*/
-/*@import './payment.css';*/
-/*@import './notifications.css';*/
+@import './edit-profile.css';
+@import './verify-profile.css';
+@import './payment.css';
+@import './notifications.css';
 /*@import './page404.css';*/
-/*@import './inbox.css';*/
-/*@import './chat.css';*/
+@import './inbox.css';
+@import './chat.css';
 
  * {
   margin: 0;

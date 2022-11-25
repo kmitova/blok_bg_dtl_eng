@@ -1,0 +1,33 @@
+{% extends 'partials/base-private.html' %}
+
+{% load static %}
+
+{% block page-content %}
+    <div class="container">
+      <div class="profile-container">
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="profile-img" class="profile-img" />
+        <div class="names-and-username">
+          <h2 class="name">John Doe</h2>
+          <h5>@johndoe</h5>
+        </div>
+        <div class="profile-info">
+          <h4>Posts: <span class="total-posts">23</span></h4>
+          <h4>Member since: <span class="member-since">03/07/2019</span></h4>
+          <h4>Lives at: blok <span class="blok-number">66</span> apartment <span class="apartment-number">35</span></h4>
+
+        </div>
+        <div class="edit-delete-buttons">
+
+        <a class="edit-btn" role="button" href="{% url 'edit profile page' %}">Edit Profile</a>
+
+        <a class="delete-btn" role="button" href="{% url 'delete profile page' %}">Delete Profile</a>
+
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'scripts/app.js' %}" type="text/javascript"></script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'partials/base-private.html' %}
+
+{% load static %}
+
+{% block page-content %}
+    <div class="payment-container">
+      <div class="fee-details">
+        <h2 class="fee-details-content">
+          This month's fee is $<span class="fee-amount">20</span>.
+        </h2>
+        <h3 class="deadline">
+          The deadline for payment is{" "}
+          <span class="deadline-date">11/05/22</span>.
+        </h3>
+      </div>
+      <form action="" class="payment-form">
+        <h2>Pay monthly fee:<
+        <div class="form-items">
+          <div class="form-item">
+            <label for="">Card number:</label>
+            <input
+              type="tel"
+              inputmode="numeric"
+              pattern="[0-9\s]{13,19}"
+              autocomplete="cc-number"
+              maxlength="19"
+              placeholder="xxxx xxxx xxxx xxxx"
+            />
+          </div>
+          <div class="form-item">
+            <label for="">CVV:</label>
+            <input type="text" />
+          </div>
+          <div class="form-item">
+            <label for="">Card expiration date:</label>
+            <input type="date" />
+          </div>
+          <div class="total-amount-container">
+              <h4 class="total-amount-content">
+              Total: $<span class="total-to-pay">20</span>
+            </h4>
+
+          </div>
+        </div>
+
+        <button class="pay-btn">Pay now</button>
+      </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'scripts/app.js' %}" type="text/javascript"></script>
+{% endblock %}

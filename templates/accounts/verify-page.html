@@ -1,0 +1,22 @@
+
+
+{% extends 'partials/base-private.html' %}
+
+{% load static %}
+
+{% block page-content %}
+    <div class="container">
+      <div class="verify-container">
+        <h2>Before deleting your profile, please verify that it's you:</h2>
+        <form action="" method="" class="delete-profile-form">
+          <input type="password" name="password" id="password" placeholder="Enter password"/>
+          <button class="verify-btn">Verify and Delete</button>
+        </form>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'scripts/app.js' %}" type="text/javascript"></script>
+{% endblock %}

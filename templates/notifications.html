@@ -1,0 +1,50 @@
+{% extends 'partials/base-private.html' %}
+
+{% load static %}
+
+{% block page-content %}
+
+    <div class="notifications-container">
+      <h2 class="notifications-title">Notifications <i class="fa-solid fa-bell"></i></h2>
+      <ul class="notifications-list">
+        <li class="notification-item">
+            <div class="notification-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" /></div>
+            <div class="notif-title-and-content">
+              <p class="notif-title">Jane Martin supported your post</p>
+              <p class="notif-date">10 min ago</p>
+            </div>
+            <div class="delete-icon"><i class="fa-solid fa-trash"><a href=""></a></i></div>
+        </li>
+        <li class="notification-item">
+            <div class="notification-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" /></div>
+            <div class="notif-title-and-content">
+              <p class="notif-title">Jane Martin supported your post</p>
+              <p class="notif-date">10 min ago</p>
+            </div>
+            <div class="delete-icon"><i class="fa-solid fa-trash"><a href=""></a></i></div>
+        </li>
+        <li class="notification-item">
+            <div class="notification-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" /></div>
+            <div class="notif-title-and-content">
+              <p class="notif-title">Chris Davis commented on your post</p>
+              <p class="notif-date">Yesterday</p>
+            </div>
+            <div class="delete-icon"><i class="fa-solid fa-trash"><a href=""></a></i></div>
+        </li>
+        <li class="notification-item">
+            <div class="notification-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" /></div>
+            <div class="notif-title-and-content">
+              <p class="notif-title">Announcement from your domoupravitel John Doe</p>
+              <p class="notif-date">24/02/22</p>
+              <div class="notif-content">Meeting announcement. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, blanditiis sint! Incidunt magnam impedit culpa ullam, veniam quidem et cupiditate?</div>
+            </div>
+            <div class="delete-icon"><i class="fa-solid fa-trash"><a href=""></a></i></div>
+        </li>
+
+      </ul>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'scripts/app.js' %}" type="text/javascript"></script>
+{% endblock %}

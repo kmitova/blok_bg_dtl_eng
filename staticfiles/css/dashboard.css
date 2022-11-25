@@ -5,7 +5,7 @@ main {
   align-items: center;
 
   justify-content: center;
-  height: 90vh;
+  height: 100vh;
   margin-bottom: 7em;
   margin-top: 7em;
   position: relative;
@@ -261,9 +261,12 @@ main {
 
 .users-list {
   border: 2px solid red;
-  background-color: red;
+  background-color: #d1d5db;
   height: 100%;
   margin-left: 7em;
+  padding: 2em;
+  border-radius: 10px;
+
   /*position: absolute;*/
   /*top: 50px;*/
   /*margin: auto;*/
@@ -293,6 +296,14 @@ main {
   width: 100%;
   gap: 2em;
   margin-top: 1em;
+  background-color: white;
+  border-radius: 5px;
+  padding: .6em;
+}
+
+.users-list li i {
+  cursor: pointer;
+  /*color: white;*/
 }
 
 .hamburger-menu {

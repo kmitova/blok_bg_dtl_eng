@@ -15,12 +15,11 @@
         <div class="profile-icons">
             <div class="icons" id="icons">
                 <i class="fa-regular fa-xmark" id="close-icons-menu"></i>
-                <i class="fa-solid fa-message fa-lg menu-icon" id="message-icon"><a href="/"></a></i>
-        <i class="fa-solid fa-bell fa-lg menu-icon" id="bell-icon"><a href=""></a></i>
-        <i class="fa-solid fa-user fa-lg menu-icon" id="profile-icon"><a href=""></a></i>
+                <a href="{% url 'inbox' %}"><i class="fa-solid fa-message fa-lg menu-icon" id="message-icon"></i></a>
+        <a href="{% url 'notifications' %}"><i class="fa-solid fa-bell fa-lg menu-icon" id="bell-icon"></i></a>
+        <i class="fa-solid fa-user fa-lg menu-icon" id="profile-icon"></i>
 
             </div>
-              {#  TODO: add javascript and display profile submenu/ hide menu on small screens#}
 
             <i class="fa-solid fa-bars fa-lg" id="header-hamburger-menu"></i>
         </div>
@@ -36,7 +35,8 @@
 <div class="profile-choices" id="profile-choices">
     <i class="fa-regular fa-xmark" id="profile-menu-close"></i>
             <ul>
-                <li><a href="">Profile</a></li>
+                <li><a href="{% url 'profile page' %}">Profile</a></li>
+                <li><a href="{% url 'payment' %}">Payment</a></li>
                 <li><a href="">Make Announcement</a></li>
                 <li><a href="">Logout</a></li>
             </ul>
