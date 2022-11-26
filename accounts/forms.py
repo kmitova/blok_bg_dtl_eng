@@ -2,44 +2,64 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 
+from accounts.templatetags.custom_filters import placeholder
+
 UserModel = get_user_model()
 
 
 class UserCreateForm(UserCreationForm):
     class Meta:
         model = UserModel
-        fields = ('first_name', 'last_name', 'username', 'email', 'building_code', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'username', 'email',
+                  'building_code', 'password1', 'password2')
+
+
+class AdminUserCreateForm(UserCreationForm):
+    class Meta:
+        model = UserModel
+        fields = ('first_name', 'last_name', 'username', 'email',
+                  'building_code', 'is_admin', 'admin_code',
+                  'password1', 'password2')
+
+        is_admin = forms.BooleanField(label="I confirm I am an admin.")
         # widgets = {
-        #     'first_name': forms.TextInput(
-        #         attrs={'placeholder': 'First Name'}
-        #     ),
-        #     'last_name': forms.TextInput(
-        #         attrs={'placeholder': 'Last Name'}
-        #     ),
-        #     'username': forms.TextInput(
-        #         attrs={'placeholder': 'Username'}
-        #     ),
-        #     'email': forms.EmailInput(
-        #         attrs={'placeholder': 'Email'}
-        #     ),
-        #     'building_code': forms.NumberInput(
-        #         attrs={'placeholder': 'Building Code'}
-        #     ),
-        #     'password1': forms.PasswordInput(
-        #         attrs={'placeholder': 'Password'}
-        #     ),
-        #     'password2': forms.PasswordInput(
-        #         attrs={'placeholder': 'Confirm Password'}
-        #     ),
+        #     'is_admin': forms.HiddenInput(
+        #         attrs={
+        #             'value': True
+        #         }
+        #     )
         # }
 
 
-        # field_classes = {'username': UsernameField}
-
 class UserLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update(
+            {'placeholder': 'Username'}
+        )
+        self.fields['password'].widget.attrs.update(
+            {'placeholder': 'Password'}
+    )
+
+
+# class AdminUserLoginForm(forms.ModelForm):
+#     # def __init__(self, *args, **kwargs):
+#     #     self.request = kwargs.pop('request', None)
+#     #     super().__init__(*args, **kwargs)
+#
+#     class Meta:
+#         model = UserModel
+#         fields = ('username', 'admin_code', 'password')
+#         widgets = {
+#             'password': forms.PasswordInput()
+#         }
+
+
+class AdminUserLoginForm(AuthenticationForm):
     username = UsernameField(
         widget=forms.TextInput(attrs={'placeholder': 'Username'})
     )
+    # admin_code = forms.NumberInput(attrs={'placeholder': 'Admin Code'})
     password = forms.CharField(
         strip=False,
         widget=forms.PasswordInput(attrs={'placeholder': 'Password'})

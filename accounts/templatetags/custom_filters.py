@@ -8,3 +8,8 @@ register = template.Library()
 def placeholder(value, token):
     value.field.widget.attrs['placeholder'] = token
     return value
+
+# def label(value, token):
+#
+#     value.fields['is_admin'].label = token
+#     return value

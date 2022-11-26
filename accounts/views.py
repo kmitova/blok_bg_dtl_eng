@@ -1,10 +1,11 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, logout, authenticate, login
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import views as auth_views
-from accounts.forms import UserCreateForm, UserLoginForm
+# from django.shortcuts import render_to_response
+from accounts.forms import UserCreateForm, UserLoginForm, AdminUserLoginForm, AdminUserCreateForm
 
 UserModel = get_user_model()
 # def register(request):
@@ -18,9 +19,40 @@ class UserRegisterView(views.CreateView):
     success_url = reverse_lazy('home page')
 
 
+class AdminUserRegisterView(views.CreateView):
+    model = UserModel
+    form_class = AdminUserCreateForm
+    template_name = 'accounts/register-admin.html'
+    success_url = reverse_lazy('home page')
+
+
 class UserLoginView(auth_views.LoginView):
     form_class = UserLoginForm
     template_name = 'accounts/login.html'
+    next_page = reverse_lazy('home page')
+
+
+# def login_admin(request):
+#     logout(request)
+#     username = ''
+#     password = ''
+#     admin_code = ''
+#
+#     if request.POST:
+#         username = request.POST['username']
+#         admin_code = request.POST['admin_code']
+#         password = request.POST['password']
+#         user = authenticate(username=username, admin_code=admin_code, password=password)
+#         if user is not None:
+#             if user.is_active:
+#                 login(request, user)
+#                 return redirect('home page')
+#     return render(request, 'accounts/login-admin.html')
+#
+#
+class AdminUserLoginView(auth_views.LoginView):
+    form_class = AdminUserLoginForm
+    template_name = 'accounts/login-admin.html'
     next_page = reverse_lazy('home page')
 
 
@@ -31,12 +63,12 @@ class UserLogoutView(auth_views.LogoutView):
 #     return render(request, 'accounts/login.html')
 
 
-def register_admin(request):
-    return render(request, 'accounts/register-admin.html')
-
-
-def login_admin(request):
-    return render(request, 'accounts/login-admin.html')
+# def register_admin(request):
+#     return render(request, 'accounts/register-admin.html')
+#
+#
+# def login_admin(request):
+#     return render(request, 'accounts/login-admin.html')
 
 
 def profile_page(request):
