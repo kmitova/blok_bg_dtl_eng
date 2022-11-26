@@ -14,17 +14,6 @@
     {% include 'partials/header-public.html' %}
 <div class="container">
         {% block page-content %}
-            <div class="container-404">
-        <div class="left-side">
-          <div class="error-name">404 Page Not Found</div>
-          <h1 class="404-title">Ugh oh, something went wrong.</h1>
-        </div>
-      <div class="right-side">
-        <img src="{% static 'images/404image.png' %}" alt="" class="error-img" />
-      <a href="{% url 'landing page' %}" class="return-link">Return to Landing Page</a>
-      </div>
-
-  </div>
     {% endblock %}
 </div>
 
