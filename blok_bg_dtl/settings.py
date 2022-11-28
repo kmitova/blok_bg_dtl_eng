@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import environ
-
-
+from django.urls import reverse_lazy
 
 # Initialise environment variables
 env = environ.Env()
@@ -145,3 +144,4 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.AppUser'
+LOGIN_REDIRECT_URL = reverse_lazy('home page')

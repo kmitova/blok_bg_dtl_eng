@@ -39,7 +39,8 @@
         </div>
         <div class="item">
           <label for="password">Password:</label>
-            {{ form.password }}
+{#            {{ form.password }}#}
+            <a href="{% url 'change password' pk=object.pk %}">Change password</a>
 {#          <input type="text" value="password" />#}
         </div>
         <button class="save-btn">Save Changes</button>

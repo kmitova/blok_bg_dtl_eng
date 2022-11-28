@@ -11,7 +11,7 @@
         <form action="{% url 'delete profile' pk=request.user.pk %}" method="post" class="delete-profile-form">
 {#          <input type="password" name="password" id="password" placeholder="Enter password"/>#}
             {% csrf_token %}
-            {{ form.password }}
+            {{ form }}
             <button class="verify-btn">Verify and Delete</button>
         </form>
       </div>
