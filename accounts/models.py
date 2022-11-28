@@ -56,20 +56,28 @@ class AppUser(AbstractUser):
         blank=False,
     )
 
+    apartment_number = models.CharField(
+        default='not specified',
+        max_length=20,
+        null=True,
+        blank=True,
+    )
+
     is_admin = models.BooleanField(
         null=True,
         blank=True,
         default=False
     )
 
-    admin_code = models.IntegerField(
+    admin_code = models.CharField(
+        max_length=5,
         null=True,
         blank=True,
     )
 
     profile_picture = models.ImageField(
         upload_to='images/',
-        # default='images/default_profile_pic.png',
-        null=True,
-        blank=True,
+        default='staticfiles/images/blank-profile-picture.png',
+        null=False,
+        blank=False,
     )

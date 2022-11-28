@@ -8,9 +8,11 @@
     <div class="container">
       <div class="verify-container">
         <h2>Before deleting your profile, please verify that it's you:</h2>
-        <form action="" method="" class="delete-profile-form">
-          <input type="password" name="password" id="password" placeholder="Enter password"/>
-          <button class="verify-btn">Verify and Delete</button>
+        <form action="{% url 'delete profile' pk=request.user.pk %}" method="post" class="delete-profile-form">
+{#          <input type="password" name="password" id="password" placeholder="Enter password"/>#}
+            {% csrf_token %}
+            {{ form.password }}
+            <button class="verify-btn">Verify and Delete</button>
         </form>
       </div>
     </div>

@@ -7,6 +7,18 @@ from accounts.templatetags.custom_filters import placeholder
 UserModel = get_user_model()
 
 
+class DeleteProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserModel
+        fields = ('password',)
+
+    def save(self, commit=True):
+        if commit:
+            self.instance.delete()
+
+        return self.instance
+
+
 class UserCreateForm(UserCreationForm):
     class Meta:
         model = UserModel
