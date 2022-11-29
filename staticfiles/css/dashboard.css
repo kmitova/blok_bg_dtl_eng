@@ -103,6 +103,9 @@ main {
 .post-user-and-date {
 
 }
+.post-img {
+  width: 200px;
+}
 
 .post-author {
   font-weight: bold;

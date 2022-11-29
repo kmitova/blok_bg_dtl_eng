@@ -7,27 +7,24 @@ from django.views import generic as views
 from django.contrib.auth import views as auth_views
 from django.views.generic import DetailView, UpdateView
 
-# from django.shortcuts import render_to_response
 from accounts.forms import UserCreateForm, UserLoginForm, AdminUserLoginForm, AdminUserCreateForm, DeleteProfileForm
 from core.utils import get_date_joined
 
 UserModel = get_user_model()
-# def register(request):
-#     return render(request, 'accounts/register.html')
 
 
 class UserRegisterView(views.CreateView):
     model = UserModel
     form_class = UserCreateForm
     template_name = 'accounts/register.html'
-    success_url = reverse_lazy('home page')
+    success_url = reverse_lazy('login')
 
 
 class AdminUserRegisterView(views.CreateView):
     model = UserModel
     form_class = AdminUserCreateForm
     template_name = 'accounts/register-admin.html'
-    success_url = reverse_lazy('home page')
+    success_url = reverse_lazy('login admin')
 
 
 class UserLoginView(auth_views.LoginView):
@@ -52,11 +49,6 @@ class ProfileDetailsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['is_owner'] = self.request.user == self.object
-        # context['pets_count'] = self.object.pet_set.count()
-        # photos = self.object.photo_set.prefetch_related('photolike_set')
-        # context['photos_count'] = photos.count()
-        # context['likes_count'] = sum([x.photolike_set.count() for x in photos])
         """
         date joined, name, number of posts, flat number, blok number
         """
@@ -70,70 +62,22 @@ class ProfileDetailsView(DetailView):
 class ProfileEditView(UpdateView):
     template_name = 'accounts/edit-profile.html'
     model = UserModel
-    fields = ('first_name', 'last_name', 'email', 'password', 'apartment_number', 'username', 'profile_picture')
+    fields = ('first_name', 'last_name', 'email', 'apartment_number', 'username')
 
     def get_success_url(self):
         return reverse_lazy('profile page', kwargs={
             'pk': self.request.user.pk
         })
 
-# def login(request):
-#     return render(request, 'accounts/login.html')
-
-
-# def register_admin(request):
-#     return render(request, 'accounts/register-admin.html')
-#
-#
-# def login_admin(request):
-#     return render(request, 'accounts/login-admin.html')
-
-
-def profile_page(request):
-    return render(request, 'accounts/profile-page.html')
-
-
-# def edit_profile_page(request, pk):
-#     return render(request, 'accounts/edit-profile.html')
-
-def get_profile(to_delete_pk):
-    try:
-        return UserModel.objects.filter(pk=to_delete_pk).get()
-    except UserModel.DoesNotExist as e:
-        return None
-
-
 class DeleteProfileView(UpdateView):
     form_class = DeleteProfileForm
     template_name = 'accounts/verify-page.html'
+
     def get_success_url(self):
         return reverse_lazy('landing page')
 
     def get_object(self):
         return self.request.user
-    # def get_object(self):
-    #     return self.request.user
-
-    # def get_success_url(self):
-    #     return self.request.get_full_path()
-    # profile = get_profile(pk)
-    # if request.method == 'GET':
-    #     form = DeleteProfileForm()
-    # else:
-    #     form = DeleteProfileForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('landing page')
-    #
-    # context = {
-    #     'form': form,
-    # }
-    #
-    # return render(
-    #     request,
-    #     'accounts/verify-page.html',
-    #     context,
-    # )
 
 
 def change_password(request, pk):

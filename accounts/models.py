@@ -81,3 +81,4 @@ class AppUser(AbstractUser):
         null=True,
         blank=True,
     )
+

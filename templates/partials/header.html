@@ -3,7 +3,14 @@
 {% load static %}
 <header class='header header-private'>
     <div class="left-side">
-        <div class='title-logo'><h3>BLOK <span>66</span></h3>
+
+        <div class='title-logo'><h3>BLOK <span>
+            {% if user.is_authenticated %}
+            {{ user.building_code }}
+            {% else %}
+                bg
+            {% endif %}
+        </span></h3>
             <i class="fa-regular fa-building fa-lg"></i>
         </div>
         {% if user.is_authenticated %}
