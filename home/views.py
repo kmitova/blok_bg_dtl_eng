@@ -2,20 +2,21 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from home.forms import PostCreateForm, CommentForm
-from home.models import Post
+from home.forms import PostCreateForm, CommentForm, ReplyForm
+from home.models import Post, Comment
 
 UserModel = get_user_model()
 def home_page(request):
     posts = Post.objects.all()
-    print(posts)
+    # print(posts)
     post7 = posts.filter(pk=7).get()
-    print(post7)
+    # print(post7)
     # print(post7.comment_set.all())
     context = {
         'posts': posts,
         'post-form': PostCreateForm(),
         'comment_form': CommentForm(),
+        'reply_form': ReplyForm(),
     }
     return render(request, 'dashboard.html', context)
 
@@ -37,6 +38,22 @@ def comment_post(request, post_id):
 
     return redirect('home page')
 
+@login_required
+def reply_to_comment(request,  post_id, comment_id):
+    comment = Comment.objects.filter(pk=comment_id).get()
+    post = Post.objects.filter(pk=post_id).get()
+
+    form = ReplyForm(request.POST)
+    if form.is_valid():
+        reply = form.save(commit=False)
+
+        reply.comment = comment
+        reply.post = post
+        # print(post)
+        reply.user = request.user
+        reply.save()
+
+    return redirect('home page')
 
 @login_required
 def make_post(request):

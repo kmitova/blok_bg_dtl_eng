@@ -22,13 +22,16 @@
             </a>
           </p>
             <form
-              action=""
+              action="{% url 'reply to comment' post_id=post.id comment_id=comment.pk %}"
               class="reply-form"
+              method="post"
             >
-              <input
-                placeholder="Add a reply..."
-
-              />
+{#              <input#}
+{#                placeholder="Add a reply..."#}
+{##}
+{#              />#}
+                {{ reply_form }}
+                {% csrf_token %}
               <div class="post-actions">
                 <button class="reply-form-btn"
                 >
@@ -36,7 +39,7 @@
                 </button>
               </div>
             </form>
-
+            {% for reply in comment.reply_set.all %}
             <div class="reply">
 
                 <div class="reply-info">
@@ -45,12 +48,13 @@
                         <i class="fa-solid fa-user"></i>
                     </div>
                     <div class="reply-user-and-date">
-                        <p class="reply-author">Jane Doe</p>
-                         <p class="reply-date">11/11/22 at 14:18pm</p>
+                        <p class="reply-author">{{ reply.user.first_name }} {{ reply.user.last_name }}</p>
+                         <p class="reply-date">{{ reply.publication_date }}</p>
                                 </div>
                           </div>
-                <div class="reply-content">this is a reply to the comment above.</div>
+                <div class="reply-content">{{ reply.text }}</div>
                  </div>
+            {% endfor %}
         </div>
       </div>
     </div>

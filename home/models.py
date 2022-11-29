@@ -58,3 +58,37 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['publication_date']
+
+
+class Reply(models.Model):
+    MAX_TEXT_LENGTH = 300
+    text = models.CharField(
+        max_length=MAX_TEXT_LENGTH,
+        null=False,
+        blank=False,
+    )
+
+    publication_date = models.DateTimeField(
+        auto_now_add=True,
+        null=False,
+        blank=True,
+    )
+
+    comment = models.ForeignKey(
+        Comment,
+        on_delete=models.RESTRICT,
+        null=False,
+        blank=True,
+    )
+
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.RESTRICT,
+        null=False,
+        blank=True,
+    )
+
+    user = models.ForeignKey(UserModel, on_delete=models.RESTRICT, )
+
+    class Meta:
+        ordering = ['publication_date']
