@@ -6,12 +6,12 @@
           <i class="fa-solid fa-user fa-lg"></i>
         </div>
         <div class="comment-user-and-date">
-          <p class="comment-author">Jane Doe</p>
-          <p class="comment-date">11/11/22 at 14:18pm</p>
+          <p class="comment-author">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
+          <p class="comment-date">{{ comment.publication_date }}</p>
         </div>
       </div>
       <div class="comment-content">
-        <p class="comment-text">This is a comment. more text here.</p>
+        <p class="comment-text">{{ comment.text }}</p>
         <div class="replies-container" >
           <p class="replies-count">
             <a href="" class="replies-link" onClick={handleClickReplies}>

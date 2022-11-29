@@ -57,13 +57,17 @@
                 <div class="comments-container">
 
                     <div class="comments">
-                        {% include "partials/comment.html"%}
+                        {% for comment in post.comment_set.all %}
+                        {% include "partials/comment.html" with comment=comment%}
+                            {% endfor %}
                     </div>
 
                 </div>
                 <div class="make-comment-container">
-                    <form action="" >
-                        <input placeholder="Add a comment..."/>
+                    <form action="{% url 'comment post' post_id=post.pk %}" method="post" >
+{#                        <input placeholder="Add a comment..."/>#}
+                        {{ comment_form }}
+                        {% csrf_token %}
                         <div class="post-actions">
                             <button class="make-comment-btn">
                                 Post

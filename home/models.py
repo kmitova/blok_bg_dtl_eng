@@ -24,10 +24,37 @@ class Post(models.Model):
         blank=True,
     )
 
-    publication_date = models.DateField(
+    publication_date = models.DateTimeField(
         blank=True,
         null=False,
         auto_now=True,
     )
 
     user = models.ForeignKey(UserModel, on_delete=models.RESTRICT, )
+
+
+class Comment(models.Model):
+    MAX_TEXT_LENGTH = 300
+    text = models.CharField(
+        max_length=MAX_TEXT_LENGTH,
+        null=False,
+        blank=False,
+    )
+
+    publication_date = models.DateTimeField(
+        auto_now_add=True,
+        null=False,
+        blank=True,
+    )
+
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.RESTRICT,
+        null=False,
+        blank=True,
+    )
+
+    user = models.ForeignKey(UserModel, on_delete=models.RESTRICT,)
+
+    class Meta:
+        ordering = ['publication_date']
