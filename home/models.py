@@ -92,3 +92,7 @@ class Reply(models.Model):
 
     class Meta:
         ordering = ['publication_date']
+
+
+class SupportPost(models.Model):
+    related_post = models.ForeignKey(Post, on_delete=models.CASCADE)

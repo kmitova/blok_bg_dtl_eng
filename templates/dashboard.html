@@ -46,12 +46,12 @@
                 {% endif %}
                 <div class="support-btn-and-comments-count">
                     <div class="support-btn">
-                            <i class="fa-solid fa-thumbs-up fa-lg thumb-icon"><a href=""></a></i>
-                        <span class="times-supported">4</span>
+                            <a href="{% url 'support post' post.id %}"><i class="fa-solid fa-thumbs-up fa-lg thumb-icon"></i></a>
+                        <span class="times-supported">{{ post.supportpost_set.count }}</span>
                     </div>
                     <p class="comments-count" onClick={handleClickComments}>
                         <a href="">
-                            <span class="comments-num">2</span> comments
+                            <span class="comments-num">{{ post.comment_set.count }}</span> comments
                         </a>
                     </p>
                 </div>

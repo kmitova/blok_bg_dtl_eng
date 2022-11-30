@@ -1,17 +1,16 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from home.forms import PostCreateForm, CommentForm, ReplyForm
-from home.models import Post, Comment
+from home.models import Post, Comment, SupportPost
 
 UserModel = get_user_model()
+
+
 def home_page(request):
     posts = Post.objects.all()
-    # print(posts)
-    post7 = posts.filter(pk=7).get()
-    # print(post7)
-    # print(post7.comment_set.all())
+
     context = {
         'posts': posts,
         'post-form': PostCreateForm(),
@@ -55,6 +54,7 @@ def reply_to_comment(request,  post_id, comment_id):
 
     return redirect('home page')
 
+
 @login_required
 def make_post(request):
     if request.method == "GET":
@@ -73,3 +73,18 @@ def make_post(request):
     }
 
     return render(request, 'dashboard.html', context)
+
+
+def support_post(request, post_id):
+    post = Post.objects.filter(pk=post_id).get()
+    support_object = SupportPost.objects.filter(related_post_id=post_id).first()
+
+    if support_object:
+        support_object.delete()
+    else:
+        support = SupportPost(related_post=post)
+        support.save()
+
+    return redirect(request.META['HTTP_REFERER'] + f'#{post_id}')
+
+
