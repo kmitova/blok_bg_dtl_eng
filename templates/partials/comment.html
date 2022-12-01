@@ -3,7 +3,9 @@
 <div class="comment">
       <div class="comment-info">
         <div class="user-img">
-          <i class="fa-solid fa-user fa-lg"></i>
+            <a href="{% url 'profile page' pk=comment.user.pk %}">
+                <img src="{{ comment.user.profile_picture.url }}" alt="image of {{ user.username }}" class="profile-pic-comment">
+            </a>
         </div>
         <div class="comment-user-and-date">
           <p class="comment-author">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
@@ -45,7 +47,10 @@
                 <div class="reply-info">
 
                     <div class="user-img">
-                        <i class="fa-solid fa-user"></i>
+                        <a href="{% url 'profile page' pk=reply.user.pk %}">
+
+                                    <img src="{{ reply.user.profile_picture.url }}" alt="image of {{ user.username }}" class="profile-pic-reply">
+                        </a>
                     </div>
                     <div class="reply-user-and-date">
                         <p class="reply-author">{{ reply.user.first_name }} {{ reply.user.last_name }}</p>

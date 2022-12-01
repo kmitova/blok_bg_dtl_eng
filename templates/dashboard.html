@@ -22,8 +22,10 @@
             <div class="post-container">
                 <div class="post-info">
                     <div class="user-img">
-{#                        TODO: display user profile pic #}
-                        <i class="fa-solid fa-user fa-2x"></i>
+                         <a href="{% url 'profile page' pk=post.user.pk %}">
+                             <img src="{{ post.user.profile_picture.url }}" alt="image of {{ user.username }}" class="profile-pic-user">
+                         </a>
+{#                        <i class="fa-solid fa-user fa-2x"></i>#}
                     </div>
                     <div class="post-user-and-date">
                         <p class="post-author">{{ post.user.first_name }} {{ post.user.last_name }}</p>
@@ -46,7 +48,13 @@
                 {% endif %}
                 <div class="support-btn-and-comments-count">
                     <div class="support-btn">
-                            <a href="{% url 'support post' post.id %}"><i class="fa-solid fa-thumbs-up fa-lg thumb-icon"></i></a>
+                            <a href="{% url 'support post' post.id %}">
+                                {% if post.supportpost_set.all %}
+                                    <i class="fa-solid fa-thumbs-down"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-thumbs-up fa-lg thumb-icon"></i>
+                                {% endif %}
+                            </a>
                         <span class="times-supported">{{ post.supportpost_set.count }}</span>
                     </div>
                     <p class="comments-count" onClick={handleClickComments}>
@@ -59,7 +67,7 @@
 
                     <div class="comments">
                         {% for comment in post.comment_set.all %}
-                        {% include "partials/comment.html" with comment=comment%}
+                        {% include "partials/comment.html" with comment=comment %}
                             {% endfor %}
                     </div>
 

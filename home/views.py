@@ -11,6 +11,7 @@ UserModel = get_user_model()
 def home_page(request):
     posts = Post.objects.all()
 
+
     context = {
         'posts': posts,
         'post-form': PostCreateForm(),

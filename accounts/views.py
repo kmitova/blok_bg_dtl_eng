@@ -52,7 +52,8 @@ class ProfileDetailsView(DetailView):
         """
         date joined, name, number of posts, flat number, blok number
         """
-
+        context["posts_count"] = self.object.post_set.count()
+        context['is_owner'] = self.request.user == self.object
         context['blok_number'] = str(self.object.building_code)[2:]
         context['date_joined'] = get_date_joined(self.object.date_joined)
         print(context)
