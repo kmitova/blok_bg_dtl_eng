@@ -1,8 +1,8 @@
 from django.urls import path
 
-from payment.views import payment_page, SetPaymentView
+from payment.views import SetPaymentView, pay_page
 
 urlpatterns = (
-    path('', payment_page, name='payment'),
+    path('', pay_page, name='payment'),
     path('set-payment/', SetPaymentView.as_view(), name='set payment'),
 )
