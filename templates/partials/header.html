@@ -52,8 +52,12 @@
             <ul>
                 <li><a href="{% url 'profile page' pk=user.pk %}">Profile</a></li>
                 <li><a href="{% url 'payment' %}">Payment</a></li>
+                {% if user.is_admin %}
+                    <li><a href="{% url 'set payment' %}" class="open-modal-btn">Set Fee</a></li>
+
                 <li><button class="open-modal-btn">Make Announcement</button></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% endif %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </div>
 {% endif %}

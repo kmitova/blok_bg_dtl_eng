@@ -1,6 +1,6 @@
 from django.contrib import messages
-from django.contrib.auth import get_user_model, logout, authenticate, login, update_session_auth_hash
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth import get_user_model, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
