@@ -85,39 +85,41 @@
                     </form>
                 </div>
             </div>
-            {#        <Post />#}
-            {#        <Post />#}
         </div>
         {% endfor %}
-        {#      <UsersList />#}
     <div class="users-list" id="users-list">
-        <h2>Users in your group:</h2>
+        <h2>Users in your group: ({{ users.count }})</h2>
         <ul>
             {% for neighbor in users %}
+            {% if neighbor.pk != current_user.pk %}
             <li class="user-list-item">
-                <div class="user-name-picture">
+                <a href="{% url 'profile page' pk=neighbor.pk %}">
+                    <div class="user-name-picture">
 {#                    <i class="fa-solid fa-user fa-2x"></i>#}
                     <img src="{{ neighbor.profile_picture.url }}" alt="image of {{ neighbor.username }}" class="profile-pic-user">
 
                 <p>{{ neighbor.first_name }} {{ neighbor.last_name }}</p>
                 </div>
+                </a>
+
                 <i class="fa-solid fa-message fa-2x"></i>
             </li>
+                {% endif %}
             {% endfor %}
-            <li class="user-list-item">
-                <div class="user-name-picture">
-                    <i class="fa-solid fa-user fa-2x"></i>
-                <p>John Doe</p>
-                </div>
-                <i class="fa-solid fa-message fa-2x"></i>
-            </li>
-            <li class="user-list-item">
-                <div class="user-name-picture">
-                    <i class="fa-solid fa-user fa-2x"></i>
-                <p>John Doe</p>
-                </div>
-                <i class="fa-solid fa-message fa-2x"></i>
-            </li>
+{#            <li class="user-list-item">#}
+{#                <div class="user-name-picture">#}
+{#                    <i class="fa-solid fa-user fa-2x"></i>#}
+{#                <p>John Doe</p>#}
+{#                </div>#}
+{#                <i class="fa-solid fa-message fa-2x"></i>#}
+{#            </li>#}
+{#            <li class="user-list-item">#}
+{#                <div class="user-name-picture">#}
+{#                    <i class="fa-solid fa-user fa-2x"></i>#}
+{#                <p>John Doe</p>#}
+{#                </div>#}
+{#                <i class="fa-solid fa-message fa-2x"></i>#}
+{#            </li>#}
         </ul>
     </div>
     <button id="users-btn">Users</button>

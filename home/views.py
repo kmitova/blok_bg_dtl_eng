@@ -2,26 +2,21 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
-from home.forms import PostCreateForm, CommentForm, ReplyForm
+from core.utils import get_group_users, get_group_posts
+from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm
 from home.models import Post, Comment, SupportPost
 
 UserModel = get_user_model()
 
 
-
 @login_required
 def home_page(request):
-    user = request.user
-    print(user)
-    current_building_code = user.building_code
+    current_user = request.user
+    users = get_group_users(request)
+    posts = get_group_posts(request)
 
-    print(current_building_code)
-
-    users = UserModel.objects.filter(building_code=current_building_code)
-    print(users)
-    posts = Post.objects.filter(user__building_code=current_building_code)
-    print(posts)
     context = {
+        'current_user': current_user,
         'posts': posts,
         'users': users,
         'post-form': PostCreateForm(),
@@ -48,6 +43,7 @@ def comment_post(request, post_id):
 
     return redirect('home page')
 
+
 @login_required
 def reply_to_comment(request,  post_id, comment_id):
     comment = Comment.objects.filter(pk=comment_id).get()
@@ -59,7 +55,6 @@ def reply_to_comment(request,  post_id, comment_id):
 
         reply.comment = comment
         reply.post = post
-        # print(post)
         reply.user = request.user
         reply.save()
 
@@ -86,6 +81,27 @@ def make_post(request):
     return render(request, 'dashboard.html', context)
 
 
+@login_required
+def make_announcement(request):
+    if request.method == "GET":
+        form = AnnouncementForm()
+    else:
+        form = AnnouncementForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            form.save_m2m()
+            return redirect('home page')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'admin/announcement-page.html', context)
+
+
+@login_required
 def support_post(request, post_id):
     post = Post.objects.filter(pk=post_id).get()
     support_object = SupportPost.objects.filter(related_post_id=post_id).first()

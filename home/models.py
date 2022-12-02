@@ -96,3 +96,18 @@ class Reply(models.Model):
 
 class SupportPost(models.Model):
     related_post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+
+class Announcement(models.Model):
+    title = models.CharField(
+        max_length=80,
+        null=False,
+        blank=False,
+    )
+
+    content = models.TextField(
+        null=False,
+        blank=False,
+    )
+
+    user = models.ForeignKey(UserModel, on_delete=models.RESTRICT, )
