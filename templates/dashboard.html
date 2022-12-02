@@ -93,13 +93,17 @@
     <div class="users-list" id="users-list">
         <h2>Users in your group:</h2>
         <ul>
+            {% for neighbor in users %}
             <li class="user-list-item">
                 <div class="user-name-picture">
-                    <i class="fa-solid fa-user fa-2x"></i>
-                <p>John Doe</p>
+{#                    <i class="fa-solid fa-user fa-2x"></i>#}
+                    <img src="{{ neighbor.profile_picture.url }}" alt="image of {{ neighbor.username }}" class="profile-pic-user">
+
+                <p>{{ neighbor.first_name }} {{ neighbor.last_name }}</p>
                 </div>
                 <i class="fa-solid fa-message fa-2x"></i>
             </li>
+            {% endfor %}
             <li class="user-list-item">
                 <div class="user-name-picture">
                     <i class="fa-solid fa-user fa-2x"></i>

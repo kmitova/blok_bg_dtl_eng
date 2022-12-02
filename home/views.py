@@ -8,12 +8,22 @@ from home.models import Post, Comment, SupportPost
 UserModel = get_user_model()
 
 
+
+@login_required
 def home_page(request):
-    posts = Post.objects.all()
+    user = request.user
+    print(user)
+    current_building_code = user.building_code
 
+    print(current_building_code)
 
+    users = UserModel.objects.filter(building_code=current_building_code)
+    print(users)
+    posts = Post.objects.filter(user__building_code=current_building_code)
+    print(posts)
     context = {
         'posts': posts,
+        'users': users,
         'post-form': PostCreateForm(),
         'comment_form': CommentForm(),
         'reply_form': ReplyForm(),
