@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block page-content %}
+
     <main>
         <div class='empty'></div>
         <div class="posts">
@@ -11,43 +12,49 @@
                 <form action="{% url 'make post' %}" method="post" enctype="multipart/form-data" class="form post-form">
                     {% csrf_token %}
                     {{ form }}
-{#                    <textarea id="outlined-basic" placeholder="Make a post..."></textarea>#}
-{#                    <div class="post-actions">#}
-{#                        <button class='upload-btn'>Image</button>#}
-                        <button type='submit' class="submit-post-btn">Post</button>
-{#                    </div>#}
+                    {#                    <textarea id="outlined-basic" placeholder="Make a post..."></textarea>#}
+                    {#                    <div class="post-actions">#}
+                    {#                        <button class='upload-btn'>Image</button>#}
+                    <button type='submit' class="submit-post-btn">Post</button>
+                    {#                    </div>#}
                 </form>
             </div>
+            {% if query_made and posts.count == 0 %}
+                <h2>No results</h2>
+            {% elif query_made and posts.count > 0 %}
+                <h2>Results: {{ posts.count }}</h2>
+            {% endif %}
             {% for post in posts %}
-            <div class="post-container">
-                <div class="post-info">
-                    <div class="user-img">
-                         <a href="{% url 'profile page' pk=post.user.pk %}">
-                             <img src="{{ post.user.profile_picture.url }}" alt="image of {{ user.username }}" class="profile-pic-user">
-                         </a>
-{#                        <i class="fa-solid fa-user fa-2x"></i>#}
+                <div class="post-container">
+                    <div class="post-info">
+                        <div class="user-img">
+                            <a href="{% url 'profile page' pk=post.user.pk %}">
+                                <img src="{{ post.user.profile_picture.url }}" alt="image of {{ user.username }}"
+                                     class="profile-pic-user">
+                            </a>
+                            {#                        <i class="fa-solid fa-user fa-2x"></i>#}
+                        </div>
+                        <div class="post-user-and-date">
+                            <p class="post-author">{{ post.user.first_name }} {{ post.user.last_name }}</p>
+                            <p class="post-date">{{ post.publication_date }}</p>
+                        </div>
                     </div>
-                    <div class="post-user-and-date">
-                        <p class="post-author">{{ post.user.first_name }} {{ post.user.last_name }}</p>
-                        <p class="post-date">{{ post.publication_date }}</p>
+                    <div class="post-content">
+                        <p class="post-text">
+                            {{ post.content }}
+                        </p>
                     </div>
-                </div>
-                <div class="post-content">
-                    <p class="post-text">
-                        {{ post.content }}
-                    </p>
-                </div>
-                {% if post.photo %}
-{#                <div class="images-container" >#}
-                    <img class="post-img" width="200"
-                            src="/media/{{ post.photo }}"
-                            alt="sample photo"
-                    />
+                    {% if post.photo %}
+                        {#                <div class="images-container" >#}
+                        <img class="post-img" width="200"
+                             src="/media/{{ post.photo }}"
+                             alt="sample photo"
+                        />
 
-{#                </div>#}
-                {% endif %}
-                <div class="support-btn-and-comments-count">
-                    <div class="support-btn">
+                        {#                </div>#}
+                    {% endif %}
+                    <div class="support-btn-and-comments-count">
+                        <div class="support-btn">
                             <a href="{% url 'support post' post.id %}">
                                 {% if post.supportpost_set.all %}
                                     <i class="fa-solid fa-thumbs-down"></i>
@@ -55,74 +62,75 @@
                                     <i class="fa-solid fa-thumbs-up fa-lg thumb-icon"></i>
                                 {% endif %}
                             </a>
-                        <span class="times-supported">{{ post.supportpost_set.count }}</span>
-                    </div>
-                    <p class="comments-count" onClick={handleClickComments}>
-                        <a href="">
-                            <span class="comments-num">{{ post.comment_set.count }}</span> comments
-                        </a>
-                    </p>
-                </div>
-                <div class="comments-container">
-
-                    <div class="comments">
-                        {% for comment in post.comment_set.all %}
-                        {% include "partials/comment.html" with comment=comment %}
-                            {% endfor %}
-                    </div>
-
-                </div>
-                <div class="make-comment-container">
-                    <form action="{% url 'comment post' post_id=post.pk %}" method="post" >
-{#                        <input placeholder="Add a comment..."/>#}
-                        {{ comment_form }}
-                        {% csrf_token %}
-                        <div class="post-actions">
-                            <button class="make-comment-btn">
-                                Post
-                            </button>
+                            <span class="times-supported">{{ post.supportpost_set.count }}</span>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    <div class="users-list" id="users-list">
-        <h2>Users in your group: ({{ users.count }})</h2>
-        <ul>
-            {% for neighbor in users %}
-            {% if neighbor.pk != current_user.pk %}
-            <li class="user-list-item">
-                <a href="{% url 'profile page' pk=neighbor.pk %}">
-                    <div class="user-name-picture">
-{#                    <i class="fa-solid fa-user fa-2x"></i>#}
-                    <img src="{{ neighbor.profile_picture.url }}" alt="image of {{ neighbor.username }}" class="profile-pic-user">
+                        <p class="comments-count" onClick={handleClickComments}>
+                            <a href="">
+                                <span class="comments-num">{{ post.comment_set.count }}</span> comments
+                            </a>
+                        </p>
+                    </div>
+                    <div class="comments-container">
 
-                <p>{{ neighbor.first_name }} {{ neighbor.last_name }}</p>
-                </div>
-                </a>
+                        <div class="comments">
+                            {% for comment in post.comment_set.all %}
+                                {% include "partials/comment.html" with comment=comment %}
+                            {% endfor %}
+                        </div>
 
-                <i class="fa-solid fa-message fa-2x"></i>
-            </li>
-                {% endif %}
+                    </div>
+                    <div class="make-comment-container">
+                        <form action="{% url 'comment post' post_id=post.pk %}" method="post">
+                            {#                        <input placeholder="Add a comment..."/>#}
+                            {{ comment_form }}
+                            {% csrf_token %}
+                            <div class="post-actions">
+                                <button class="make-comment-btn">
+                                    Post
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
             {% endfor %}
-{#            <li class="user-list-item">#}
-{#                <div class="user-name-picture">#}
-{#                    <i class="fa-solid fa-user fa-2x"></i>#}
-{#                <p>John Doe</p>#}
-{#                </div>#}
-{#                <i class="fa-solid fa-message fa-2x"></i>#}
-{#            </li>#}
-{#            <li class="user-list-item">#}
-{#                <div class="user-name-picture">#}
-{#                    <i class="fa-solid fa-user fa-2x"></i>#}
-{#                <p>John Doe</p>#}
-{#                </div>#}
-{#                <i class="fa-solid fa-message fa-2x"></i>#}
-{#            </li>#}
-        </ul>
-    </div>
-    <button id="users-btn">Users</button>
+        <div class="users-list" id="users-list">
+            <h2>Users in your group: ({{ users.count }})</h2>
+            <ul>
+                {% for neighbor in users %}
+                    {% if neighbor.pk != current_user.pk %}
+                        <li class="user-list-item">
+                            <a href="{% url 'profile page' pk=neighbor.pk %}">
+                                <div class="user-name-picture">
+                                    {#                    <i class="fa-solid fa-user fa-2x"></i>#}
+                                    <img src="{{ neighbor.profile_picture.url }}" alt="image of {{ neighbor.username }}"
+                                         class="profile-pic-user">
+
+                                    <p>{{ neighbor.first_name }} {{ neighbor.last_name }}</p>
+                                </div>
+                            </a>
+
+                            <i class="fa-solid fa-message fa-2x"></i>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {#            <li class="user-list-item">#}
+                {#                <div class="user-name-picture">#}
+                {#                    <i class="fa-solid fa-user fa-2x"></i>#}
+                {#                <p>John Doe</p>#}
+                {#                </div>#}
+                {#                <i class="fa-solid fa-message fa-2x"></i>#}
+                {#            </li>#}
+                {#            <li class="user-list-item">#}
+                {#                <div class="user-name-picture">#}
+                {#                    <i class="fa-solid fa-user fa-2x"></i>#}
+                {#                <p>John Doe</p>#}
+                {#                </div>#}
+                {#                <i class="fa-solid fa-message fa-2x"></i>#}
+                {#            </li>#}
+            </ul>
+        </div>
+        <button id="users-btn">Users</button>
     </main>
 
 {% endblock %}

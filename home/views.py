@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
+from django.shortcuts import render, redirect
 
 from core.utils import get_group_users, get_group_posts
 from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm
@@ -15,6 +16,14 @@ def home_page(request):
     users = get_group_users(request)
     posts = get_group_posts(request)
 
+    query = request.GET.get('query')
+    query_made = False
+    if query != '' and query is not None:
+        posts = posts.filter(Q(user__first_name__icontains=query) |
+                             Q(user__last_name__icontains=query) |
+                             Q(content__icontains=query)).distinct()
+        query_made = True
+
     context = {
         'current_user': current_user,
         'posts': posts,
@@ -22,6 +31,7 @@ def home_page(request):
         'post-form': PostCreateForm(),
         'comment_form': CommentForm(),
         'reply_form': ReplyForm(),
+        'query_made': query_made
     }
     return render(request, 'dashboard.html', context)
 

@@ -14,10 +14,10 @@
             <i class="fa-regular fa-building fa-lg"></i>
         </div>
         {% if user.is_authenticated %}
-            {# TODO: trigger search form on enter with javascript#}
-            <form action="" class="search-form">
+            <form action="." class="search-form" method="get">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search">
+                <input name="query" type="text" placeholder="Search">
+                <button type="submit">Search</button>
             </form>
 
             </div>
