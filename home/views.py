@@ -31,7 +31,8 @@ def home_page(request):
         'post-form': PostCreateForm(),
         'comment_form': CommentForm(),
         'reply_form': ReplyForm(),
-        'query_made': query_made
+        'query_made': query_made,
+        'is_dashboard': True,
     }
     return render(request, 'dashboard.html', context)
 

@@ -6,7 +6,7 @@
 
         <div class='title-logo'><h3>BLOK <span>
             {% if user.is_authenticated %}
-            {{ user.building_code }}
+                {{ user.building_code }}
             {% else %}
                 bg
             {% endif %}
@@ -14,12 +14,13 @@
             <i class="fa-regular fa-building fa-lg"></i>
         </div>
         {% if user.is_authenticated %}
-            <form action="." class="search-form" method="get">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input name="query" type="text" placeholder="Search">
-                <button type="submit">Search</button>
-            </form>
-
+            {% if is_dashboard %}
+                <form action="." class="search-form" method="get">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input name="query" type="text" placeholder="Search">
+                    <button type="submit">Search</button>
+                </form>
+            {% endif %}
             </div>
             <div class="right-side">
 
@@ -47,17 +48,17 @@
         {% endif %}
 </header>
 {% if user.is_authenticated %}
-<div class="profile-choices" id="profile-choices">
-    <i class="fa-regular fa-xmark" id="profile-menu-close"></i>
-            <ul>
-                <li><a href="{% url 'profile page' pk=user.pk %}">Profile</a></li>
-                <li><a href="{% url 'payment' %}">Payment</a></li>
-                {% if user.is_admin %}
-                    <li><a href="{% url 'set payment' %}" class="open-modal-btn">Set Fee</a></li>
+    <div class="profile-choices" id="profile-choices">
+        <i class="fa-regular fa-xmark" id="profile-menu-close"></i>
+        <ul>
+            <li><a href="{% url 'profile page' pk=user.pk %}">Profile</a></li>
+            <li><a href="{% url 'payment' %}">Payment</a></li>
+            {% if user.is_admin %}
+                <li><a href="{% url 'set payment' %}" class="open-modal-btn">Set Fee</a></li>
 
                 <li><a href="{% url 'make announcement' %}">Make Announcement</a></li>
-                {% endif %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-            </ul>
-        </div>
+            {% endif %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </div>
 {% endif %}
