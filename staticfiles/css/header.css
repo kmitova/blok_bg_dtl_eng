@@ -127,6 +127,16 @@ h3 {
   display: none;
 }
 
+.badge {
+  position: absolute;
+  top: 1px;
+  right:3px;
+  padding: 2px;
+  border-radius: 50%;
+  background-color: red;
+
+}
+
 @media (max-width: 1000px) {
   #header-hamburger-menu {
     display: block;

@@ -28,7 +28,12 @@
                     <div class="icons" id="icons">
                         <i class="fa-regular fa-xmark" id="close-icons-menu"></i>
                         <a href="{% url 'inbox' %}"><i class="fa-solid fa-message fa-lg menu-icon"
-                                                       id="message-icon"></i></a>
+                                                       id="message-icon"></i>
+                            {% if unread_count %}
+                            <span class="badge">{{ unread_count }}</span>
+                                {% endif %}
+
+                        </a>
                         <a href="{% url 'notifications' %}"><i class="fa-solid fa-bell fa-lg menu-icon"
                                                                id="bell-icon"></i></a>
                         <i class="fa-solid fa-user fa-lg menu-icon" id="profile-icon"></i>

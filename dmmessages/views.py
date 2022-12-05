@@ -6,6 +6,21 @@ from django.shortcuts import render, redirect
 from dmmessages.models import Chat, ChatMessage
 
 UserModel = get_user_model()
+
+def get_unread_messages(request):
+    unread_count = 0
+    if request.user.is_authenticated:
+        unread_count = ChatMessage.objects.filter(user=request.user, is_read=False).count()
+
+    context = {
+        'unread_count': unread_count,
+    }
+
+    return context
+
+
+
+
 @login_required
 def go_to_chat(request, slug):
     """
@@ -36,8 +51,9 @@ def inbox_page(request):
         directs.update(is_read=True)
 
         for message in messages:
-            if message['user'].username == active_direct:
-                message['unread'] = 0
+            print(message['unread'])
+            # if message['user'].username == active_direct:
+            #     message['unread'] = 0
 
         context = {
             'directs': directs,

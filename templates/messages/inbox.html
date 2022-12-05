@@ -25,6 +25,11 @@
 {#                <p class="message-date">10 min ago</p>#}
 {#              <p class=class"message-preview">This a message preview. if its over a char limit, it cuts off...</p>#}
             </div>
+            {% if message.unread %}
+            <div class="unread-messages">
+                <p>{{ message.unread }} new messages.</p>
+            </div>
+            {% endif %}
         </li>
     {% endfor %}
 
