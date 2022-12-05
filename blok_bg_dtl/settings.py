@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'channels',
+
     'common',
     'accounts',
     'home',
@@ -84,6 +86,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blok_bg_dtl.wsgi.application'
+# ASGI_APPLICATION = 'blok_bg_dtl.asgi.application'
+
+# CHANNEL_LAYERS = {
+#     'default' : {
+#         'BACKEND': 'channels.layers.InMemoryChannelLayer'
+#     }
+# }
+
 
 
 # Database

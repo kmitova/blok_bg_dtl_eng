@@ -1,4 +1,4 @@
-{% extends 'partials/base-private.html' %}
+{% extends 'partials/base.html' %}
 
 {% load static %}
 
@@ -13,24 +13,27 @@
       </form>
       <h2 class="messages-title">Your chats:</h2>
       <ul class="messages-list">
-        <li class="message-item"><a href="{% url 'chat' %}">To chat</a>
-            <div class="message-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" /></div>
+        {% for message in messages %}
+        <li class="message-item"><a href="{% url 'chat' username=message.user.username %}">To chat</a>
+            <div class="message-img"><img src="{{ message.user.profile_picture.url }}" alt="profile pic of {{ message.user.profile_picture.url }}" width="40" /></div>
             <div class="message-title-and-content">
-              <p class="message-sender">Jane Martin</p>
-              <p class="message-date">10 min ago</p>
-              <p class="message-preview">This a message preview. if its over a char limit, it cuts off...</p>
+              <p class="message-sender">{{ message.user.first_name }} {{ message.user.last_name }}</p>
+             <small>@{{ message.user.username }}</small>
+{#                <p class="message-date">10 min ago</p>#}
+{#              <p class=class"message-preview">This a message preview. if its over a char limit, it cuts off...</p>#}
             </div>
-
         </li>
-        <li class="message-item"><a href="{% url 'chat' %}">To chat</a>
-            <div class="message-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" /></div>
-            <div class="message-title-and-content">
-              <p class="message-sender">Jane Martin</p>
-              <p class="message-date">10 min ago</p>
-              <p class="message-preview">This a message preview. if its over a char limit, it cuts off...</p>
-            </div>
+    {% endfor %}
 
-        </li>
+{#        <li class="message-item"><a href="{% url 'chat' %}">To chat</a>#}
+{#            <div class="message-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" /></div>#}
+{#            <div class="message-title-and-content">#}
+{#              <p class="message-sender">Jane Martin</p>#}
+{#              <p class="message-date">10 min ago</p>#}
+{#              <p class="message-preview">This a message preview. if its over a char limit, it cuts off...</p>#}
+{#            </div>#}
+{##}
+{#        </li>#}
       </ul>
     </div>
 {% endblock %}

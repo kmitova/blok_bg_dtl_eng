@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 
 from core.utils import get_group_users, get_group_posts
+from dmmessages.models import Chat
 from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm
 from home.models import Post, Comment, SupportPost
 
@@ -23,6 +24,8 @@ def home_page(request):
                              Q(user__last_name__icontains=query) |
                              Q(content__icontains=query)).distinct()
         query_made = True
+
+    # chats = Chat.objects.all()
 
     context = {
         'current_user': current_user,
