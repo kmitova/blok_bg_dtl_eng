@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from core.utils import get_group_users, get_group_posts
 from dmmessages.models import Chat
 from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm
-from home.models import Post, Comment, SupportPost
+from home.models import Post, Comment, SupportPost, Notification
 
 UserModel = get_user_model()
 
@@ -41,7 +41,34 @@ def home_page(request):
 
 
 def notifications_page(request):
-    return render(request, 'notifications.html')
+    notifications = Notification.objects.filter(user=request.user).order_by("-date")
+    for notification in notifications:
+        if not notification.is_read:
+            notification.is_read = True
+            notification.save()
+
+    context = {
+        'notifications': notifications
+    }
+
+    return render(request, 'notifications.html', context)
+
+
+def get_unread_notifications(request):
+    unread_notifications = 0
+    if request.user.is_authenticated:
+        unread_notifications = Notification.objects.filter(user=request.user, is_read=False).count()
+
+    context = {
+        'unread_notifications': unread_notifications,
+    }
+    return context
+
+
+def delete_notification(request, notification_id):
+    notification = Notification.objects.filter(pk=notification_id).get()
+    notification.delete()
+    return redirect('notifications')
 
 
 @login_required
@@ -54,6 +81,9 @@ def comment_post(request, post_id):
         comment.post = post
         comment.user = request.user
         comment.save()
+        Notification.objects.create(user=post.user,
+                                    sender=comment.user,
+                                    content=f"{comment.user.first_name} {comment.user.last_name} commented on your post.")
 
     return redirect('home page')
 
@@ -71,6 +101,9 @@ def reply_to_comment(request,  post_id, comment_id):
         reply.post = post
         reply.user = request.user
         reply.save()
+        Notification.objects.create(user=comment.user,
+                                    sender=reply.user,
+                                    content=f"{reply.user.first_name} {reply.user.last_name} replied to your comment.")
 
     return redirect('home page')
 
@@ -106,6 +139,15 @@ def make_announcement(request):
             post.user = request.user
             post.save()
             form.save_m2m()
+            users = get_group_users(request)
+            for user in users:
+                if user != post.user:
+                    Notification.objects.create(user=user,
+                                                sender=request.user,
+                                                content=f"Announcement from admin {request.user.first_name} {request.user.last_name}: "
+                                                        f"{post.title} \n "
+                                                        f"{post.content}")
+
             return redirect('home page')
 
     context = {
@@ -125,6 +167,9 @@ def support_post(request, post_id):
     else:
         support = SupportPost(related_post=post)
         support.save()
+        Notification.objects.create(user=post.user,
+                                    sender=request.user,
+                                    content=f"{request.user.first_name} {request.user.last_name} supported your post.")
 
     return redirect(request.META['HTTP_REFERER'] + f'#{post_id}')
 

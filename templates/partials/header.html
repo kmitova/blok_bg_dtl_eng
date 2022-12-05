@@ -35,7 +35,11 @@
 
                         </a>
                         <a href="{% url 'notifications' %}"><i class="fa-solid fa-bell fa-lg menu-icon"
-                                                               id="bell-icon"></i></a>
+                                                               id="bell-icon"></i>
+                            {% if unread_notifications %}
+                            <span class="badge">{{ unread_notifications }}</span>
+                                {% endif %}
+                        </a>
                         <i class="fa-solid fa-user fa-lg menu-icon" id="profile-icon"></i>
 
                     </div>

@@ -111,3 +111,11 @@ class Announcement(models.Model):
     )
 
     user = models.ForeignKey(UserModel, on_delete=models.RESTRICT, )
+
+
+class Notification(models.Model):
+    is_read = models.BooleanField(default=False)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    sender = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='sender')

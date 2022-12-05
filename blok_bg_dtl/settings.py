@@ -82,6 +82,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 'dmmessages.views.get_unread_messages',
+                'home.views.get_unread_notifications',
             ],
         },
     },

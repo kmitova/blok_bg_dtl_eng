@@ -7,6 +7,7 @@ from dmmessages.models import Chat, ChatMessage
 
 UserModel = get_user_model()
 
+
 def get_unread_messages(request):
     unread_count = 0
     if request.user.is_authenticated:
@@ -17,8 +18,6 @@ def get_unread_messages(request):
     }
 
     return context
-
-
 
 
 @login_required
