@@ -5,7 +5,9 @@
 {% block page-content %}
     <div class="chat-container">
       <div class="go-back-arrow"><a href="{% url 'inbox' %}" class="go-back-arrow-a"><i class="fa-solid fa-arrow-left"></i>Back</a></div>
-      <div class="chat-messages-container" id="chat-messages">
+        <h2>{{ recipient.first_name }} {{ recipient.last_name }}</h2>
+
+        <div class="chat-messages-container" id="chat-messages">
         <div class="chat-feed">
           <h3 class="chat-title">{{ direct.sender.first_name }} {{ direct.sender.last_name }}</h3>
             {% for direct in directs %}

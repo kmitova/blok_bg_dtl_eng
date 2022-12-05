@@ -69,6 +69,7 @@ def chat_page(request, username):
     active_direct = username
     directs = ChatMessage.objects.filter(user=user, recipient__username=username)
     directs.update(is_read=True)
+    recipient = UserModel.objects.filter(username=username).get()
     context = {}
 
     # if messages:
@@ -84,7 +85,8 @@ def chat_page(request, username):
     context = {
         'directs': directs,
         'messages': messages,
-        'active_direct': active_direct
+        'active_direct': active_direct,
+        'recipient': recipient
     }
 
     return render(request, 'messages/chat.html', context)

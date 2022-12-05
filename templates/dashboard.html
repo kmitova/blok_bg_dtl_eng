@@ -110,7 +110,7 @@
                                 </div>
                             </a>
 
-                            <i class="fa-solid fa-message fa-2x"></i>
+                            <a href="{% url 'chat' username=neighbor.username %}"><i class="fa-solid fa-message fa-2x"></i></a>
                         </li>
                     {% endif %}
                 {% endfor %}
