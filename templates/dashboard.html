@@ -92,10 +92,24 @@
                         </form>
                     </div>
                 </div>
+        {% endfor %}
+
+            {% if posts.has_previous %}
+                <a href="?page=1">&laquo First</a>
+                <a href="?page={{ posts.previous_page_number }}">Previous</a>
+
+            {% endif %}
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">Next</a>
+                <a href="?page={{ posts.paginator.num_pages }}">Last &raquo</a>
+
+            {% endif %}
                 </div>
-            {% endfor %}
+
         <div class="users-list" id="users-list">
-            <h2>Users in your group: ({{ users.count }})</h2>
+            <h2>Users in your group: ({{ users_count }})</h2>
             <ul>
                 {% for neighbor in users %}
                     {% if neighbor.pk != current_user.pk %}

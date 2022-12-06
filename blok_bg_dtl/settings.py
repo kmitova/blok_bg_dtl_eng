@@ -83,6 +83,7 @@ TEMPLATES = [
 
                 'dmmessages.views.get_unread_messages',
                 'home.views.get_unread_notifications',
+                'home.views.get_building_number',
             ],
         },
     },

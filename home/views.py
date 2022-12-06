@@ -1,10 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect
 
 from core.utils import get_group_users, get_group_posts
-from dmmessages.models import Chat
 from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm
 from home.models import Post, Comment, SupportPost, Notification
 
@@ -15,7 +15,12 @@ UserModel = get_user_model()
 def home_page(request):
     current_user = request.user
     users = get_group_users(request)
-    posts = get_group_posts(request)
+    posts = get_group_posts(request).order_by('-publication_date')
+    users_count = users.count() - 1
+
+    paginator = Paginator(posts, 2)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
 
     query = request.GET.get('query')
     query_made = False
@@ -25,7 +30,7 @@ def home_page(request):
                              Q(content__icontains=query)).distinct()
         query_made = True
 
-    # chats = Chat.objects.all()
+
 
     context = {
         'current_user': current_user,
@@ -36,12 +41,17 @@ def home_page(request):
         'reply_form': ReplyForm(),
         'query_made': query_made,
         'is_dashboard': True,
+        'users_count': users_count,
+
     }
     return render(request, 'dashboard.html', context)
 
 
 def notifications_page(request):
     notifications = Notification.objects.filter(user=request.user).order_by("-date")
+    paginator = Paginator(notifications, 2)
+    page = request.GET.get('page')
+    notifications = paginator.get_page(page)
     for notification in notifications:
         if not notification.is_read:
             notification.is_read = True
@@ -65,6 +75,22 @@ def get_unread_notifications(request):
     return context
 
 
+# @login_required
+def get_building_number(request):
+    context = {}
+    if request.user.is_authenticated:
+        user = request.user
+        current_building_code = user.building_code
+        building_number = str(current_building_code)[2:]
+        context = {
+            'building_number': building_number,
+        }
+
+    return context
+
+
+
+
 def delete_notification(request, notification_id):
     notification = Notification.objects.filter(pk=notification_id).get()
     notification.delete()
@@ -81,9 +107,10 @@ def comment_post(request, post_id):
         comment.post = post
         comment.user = request.user
         comment.save()
-        Notification.objects.create(user=post.user,
-                                    sender=comment.user,
-                                    content=f"{comment.user.first_name} {comment.user.last_name} commented on your post.")
+        if comment.user.pk != post.user.pk:
+            Notification.objects.create(user=post.user,
+                                        sender=comment.user,
+                                        content=f"{comment.user.first_name} {comment.user.last_name} commented on your post.")
 
     return redirect('home page')
 
@@ -96,14 +123,14 @@ def reply_to_comment(request,  post_id, comment_id):
     form = ReplyForm(request.POST)
     if form.is_valid():
         reply = form.save(commit=False)
-
         reply.comment = comment
         reply.post = post
         reply.user = request.user
         reply.save()
-        Notification.objects.create(user=comment.user,
-                                    sender=reply.user,
-                                    content=f"{reply.user.first_name} {reply.user.last_name} replied to your comment.")
+        if reply.user.pk != comment.user.pk:
+            Notification.objects.create(user=comment.user,
+                                        sender=reply.user,
+                                        content=f"{reply.user.first_name} {reply.user.last_name} replied to your comment.")
 
     return redirect('home page')
 
@@ -167,9 +194,10 @@ def support_post(request, post_id):
     else:
         support = SupportPost(related_post=post)
         support.save()
-        Notification.objects.create(user=post.user,
-                                    sender=request.user,
-                                    content=f"{request.user.first_name} {request.user.last_name} supported your post.")
+        if post.user.pk != request.user.pk:
+            Notification.objects.create(user=post.user,
+                                        sender=request.user,
+                                        content=f"{request.user.first_name} {request.user.last_name} supported your post.")
 
     return redirect(request.META['HTTP_REFERER'] + f'#{post_id}')
 

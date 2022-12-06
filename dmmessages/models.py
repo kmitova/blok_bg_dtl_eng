@@ -32,7 +32,6 @@ class ChatMessage(models.Model):
         default=False
     )
 
-
     @staticmethod
     def send_message(from_user, to_user, body):
         sender_message = ChatMessage(
@@ -53,8 +52,6 @@ class ChatMessage(models.Model):
         recipient_message.save()
 
         return sender_message
-
-
 
     @staticmethod
     def get_messages(user):

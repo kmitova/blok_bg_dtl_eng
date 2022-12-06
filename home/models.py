@@ -30,7 +30,7 @@ class Post(models.Model):
         auto_now=True,
     )
 
-    user = models.ForeignKey(UserModel, on_delete=models.RESTRICT, )
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, )
 
 
 class Comment(models.Model):
@@ -49,12 +49,12 @@ class Comment(models.Model):
 
     post = models.ForeignKey(
         Post,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
         null=False,
         blank=True,
     )
 
-    user = models.ForeignKey(UserModel, on_delete=models.RESTRICT,)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE,)
 
     class Meta:
         ordering = ['publication_date']
@@ -76,14 +76,14 @@ class Reply(models.Model):
 
     comment = models.ForeignKey(
         Comment,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
         null=False,
         blank=True,
     )
 
     post = models.ForeignKey(
         Post,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
         null=False,
         blank=True,
     )
@@ -110,7 +110,7 @@ class Announcement(models.Model):
         blank=False,
     )
 
-    user = models.ForeignKey(UserModel, on_delete=models.RESTRICT, )
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, )
 
 
 class Notification(models.Model):
