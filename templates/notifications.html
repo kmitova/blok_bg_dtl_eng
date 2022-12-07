@@ -28,6 +28,7 @@
 {#            <div class="delete-icon"><i class="fa-solid fa-trash"><a href=""></a></i></div>#}
 {#        </li>#}
           {% for notification in notifications %}
+
         <li class="notification-item">
             <div class="notification-img"><img src="{{ notification.sender.profile_picture.url }}" alt="" style="width: 40px; height: 40px" /></div>
             <div class="notif-title-and-content">
@@ -37,15 +38,6 @@
             <div class="delete-icon" style="margin-right: 1em;"><a href="{% url 'delete notification' notification_id=notification.pk %}"><i class="fa-solid fa-trash"></i></a></div>
         </li>
           {% endfor %}
-{#        <li class="notification-item">#}
-{#            <div class="notification-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" width="40"/></div>#}
-{#            <div class="notif-title-and-content">#}
-{#              <p class="notif-title">Announcement from your domoupravitel John Doe</p>#}
-{#              <p class="notif-date">24/02/22</p>#}
-{#              <div class="notif-content">Meeting announcement. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, blanditiis sint! Incidunt magnam impedit culpa ullam, veniam quidem et cupiditate?</div>#}
-{#            </div>#}
-{#            <div class="delete-icon"><i class="fa-solid fa-trash"><a href=""></a></i></div>#}
-{#        </li>#}
       </ul>
     {% endif %}
     {% if notifications %}

@@ -18,10 +18,6 @@ def home_page(request):
     posts = get_group_posts(request).order_by('-publication_date')
     users_count = users.count() - 1
 
-    paginator = Paginator(posts, 10)
-    page = request.GET.get('page')
-    posts = paginator.get_page(page)
-
     query = request.GET.get('query')
     query_made = False
     if query != '' and query is not None:
@@ -29,8 +25,6 @@ def home_page(request):
                              Q(user__last_name__icontains=query) |
                              Q(content__icontains=query)).distinct()
         query_made = True
-
-
 
     context = {
         'current_user': current_user,
@@ -47,12 +41,27 @@ def home_page(request):
     return render(request, 'dashboard.html', context)
 
 
+def posts_page(request):
+    posts = Post.objects.filter(user=request.user)
+
+    paginator = Paginator(posts, 5)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+
+    context = {
+        'posts': posts
+    }
+
+    return render(request, 'partials/posts.html', context)
+
+
 def notifications_page(request):
     notifications = Notification.objects.filter(user=request.user).order_by("-date")
     paginator = Paginator(notifications, 10)
     page = request.GET.get('page')
     notifications = paginator.get_page(page)
     for notification in notifications:
+        print(notification.user.post_set.filter())
         if not notification.is_read:
             notification.is_read = True
             notification.save()
@@ -60,6 +69,7 @@ def notifications_page(request):
     context = {
         'notifications': notifications
     }
+
 
     return render(request, 'notifications.html', context)
 

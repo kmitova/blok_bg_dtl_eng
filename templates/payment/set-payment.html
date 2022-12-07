@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block page-content %}
-    <form action="{% url 'set payment' %}" method="post">
+    <form action="{% url 'set payment' %}" method="post" class="set-payment-form">
     {{ form }}
     {% csrf_token %}
     <button type="submit">Set fee</button>

@@ -22,6 +22,7 @@
             </div>
             {% if is_owner %}
                 <div class="edit-delete-buttons">
+                    <a class="edit-btn" role="button" href="{% url 'posts page' %}" style="background-color: #0284c7">Your posts</a>
 
                     <a class="edit-btn" role="button" href="{% url 'edit profile' pk=object.pk %}">Edit Profile</a>
 
