@@ -14,16 +14,15 @@
       </div>
       <div class="comment-content">
         <p class="comment-text">{{ comment.text }}</p>
-        <div class="replies-container" >
-          <p class="replies-count">
-            <a href="" class="replies-link" onClick={handleClickReplies}>
-              Show replies
+        <p class="replies-count">
+            <a href="" class="replies-link" data-bs-toggle="collapse" data-bs-target="#replies" >
+              Replies ({{ comment.reply_set.count }})
             </a>
-              <a href="" class="replies-link" onClick={handleClickReplies}>
-              Reply
-            </a>
+{#              <a href="" class="replies-link" onClick={handleClickReplies}>#}
+{#              Reply#}
+{#            </a>#}
           </p>
-            <form
+        <form
               action="{% url 'reply to comment' post_id=post.id comment_id=comment.pk %}"
               class="reply-form"
               method="post"
@@ -32,7 +31,7 @@
 {#                placeholder="Add a reply..."#}
 {##}
 {#              />#}
-                {{ reply_form }}
+                {{ reply_form.text }}
                 {% csrf_token %}
               <div class="post-actions">
                 <button class="reply-form-btn"
@@ -41,6 +40,9 @@
                 </button>
               </div>
             </form>
+        <div class="replies-container collapse" id="replies" >
+
+
             {% for reply in comment.reply_set.all %}
             <div class="reply">
 

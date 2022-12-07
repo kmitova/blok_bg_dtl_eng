@@ -7,18 +7,71 @@
     <main>
         <div class='empty'></div>
         <div class="posts">
-            <div class='make-post-container'>
-                <a href="{% url 'make post' %}">Make a post</a>
-                <form action="{% url 'make post' %}" method="post" enctype="multipart/form-data" class="form post-form">
-                    {% csrf_token %}
-                    {{ form }}
+        <div class="users-modal">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal">
+                Users in your group
+            </button>
+               <!-- Modal -->
+            <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="ModalLabel">Your neighbors ({{ users_count }}):</h1>
+                            {#                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+                        </div>
+                        <div class="modal-body">
+                            <ul>
+                                {% for neighbor in users %}
+                                    {% if neighbor.pk != current_user.pk %}
+                                        <li class="user-list-item"
+                                            style="display:flex; align-items: center; justify-content: space-between; padding-bottom: 1em;">
+                                            <a href="{% url 'profile page' pk=neighbor.pk %}"
+                                               style="text-decoration: none;">
+                                                <div class="user-name-picture">
+                                                    {#                    <i class="fa-solid fa-user fa-2x"></i>#}
+                                                    <img src="{{ neighbor.profile_picture.url }}"
+                                                         alt="image of {{ neighbor.username }}"
+                                                         class="profile-pic-user">
+
+                                                    <p>{{ neighbor.first_name }} {{ neighbor.last_name }}</p>
+                                                </div>
+                                            </a>
+
+                                            <a href="{% url 'chat' username=neighbor.username %}" style="color:#a3a3a3"><i
+                                                    class="fa-solid fa-message fa-2x"></i></a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {#                  <div class="modal-footer">#}
+                        {#                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+                        {#                    <button type="button" class="btn btn-primary">Save changes</button>#}
+                        {#                  </div>#}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+            <!-- Button trigger modal -->
+
+{#            <div class='make-post-container'>#}
+{#                <a href="{% url 'make post' %}">Make a post</a>#}
+{#                <form action="{% url 'make post' %}" method="post" enctype="multipart/form-data" class="form post-form">#}
+{#                    {% csrf_token %}#}
+{#                    {{ form }}#}
                     {#                    <textarea id="outlined-basic" placeholder="Make a post..."></textarea>#}
                     {#                    <div class="post-actions">#}
                     {#                        <button class='upload-btn'>Image</button>#}
-                    <button type='submit' class="submit-post-btn">Post</button>
+{#                    <button type='submit' class="submit-post-btn">Post</button>#}
                     {#                    </div>#}
-                </form>
-            </div>
+{#                </form>#}
+{#            </div>#}
+
             {% if query_made and posts.count == 0 %}
                 <h2>No results</h2>
             {% elif query_made and posts.count > 0 %}
@@ -46,7 +99,7 @@
                     </div>
                     {% if post.photo %}
                         {#                <div class="images-container" >#}
-                        <img class="post-img" width="200"
+                        <img class="post-img" style="width: 100%; "
                              src="/media/{{ post.photo }}"
                              alt="sample photo"
                         />
@@ -56,21 +109,21 @@
                     <div class="support-btn-and-comments-count">
                         <div class="support-btn">
                             <a href="{% url 'support post' post.id %}">
-                                {% if post.supportpost_set.all %}
-                                    <i class="fa-solid fa-thumbs-down"></i>
-                                {% else %}
+{#                                {% if post.supportpost_set.all %}#}
+{#                                    <i class="fa-solid fa-thumbs-down fa-lg"></i>#}
+{#                                {% else %}#}
                                     <i class="fa-solid fa-thumbs-up fa-lg thumb-icon"></i>
-                                {% endif %}
-                            </a>
+{#                                {% endif %}</a>#}
+                                </a>
                             <span class="times-supported">{{ post.supportpost_set.count }}</span>
                         </div>
                         <p class="comments-count" onClick={handleClickComments}>
-                            <a href="">
+                            <a href="" data-bs-toggle="collapse" data-bs-target="#comments">
                                 <span class="comments-num">{{ post.comment_set.count }}</span> comments
                             </a>
                         </p>
                     </div>
-                    <div class="comments-container">
+                    <div class="comments-container collapse" id="comments">
 
                         <div class="comments">
                             {% for comment in post.comment_set.all %}
@@ -82,7 +135,7 @@
                     <div class="make-comment-container">
                         <form action="{% url 'comment post' post_id=post.pk %}" method="post">
                             {#                        <input placeholder="Add a comment..."/>#}
-                            {{ comment_form }}
+                            {{ comment_form.text }}
                             {% csrf_token %}
                             <div class="post-actions">
                                 <button class="make-comment-btn">
@@ -92,7 +145,7 @@
                         </form>
                     </div>
                 </div>
-        {% endfor %}
+            {% endfor %}
 
             {% if posts.has_previous %}
                 <a href="?page=1">&laquo First</a>
@@ -106,45 +159,45 @@
                 <a href="?page={{ posts.paginator.num_pages }}">Last &raquo</a>
 
             {% endif %}
-                </div>
-
-        <div class="users-list" id="users-list">
-            <h2>Users in your group: ({{ users_count }})</h2>
-            <ul>
-                {% for neighbor in users %}
-                    {% if neighbor.pk != current_user.pk %}
-                        <li class="user-list-item">
-                            <a href="{% url 'profile page' pk=neighbor.pk %}">
-                                <div class="user-name-picture">
-                                    {#                    <i class="fa-solid fa-user fa-2x"></i>#}
-                                    <img src="{{ neighbor.profile_picture.url }}" alt="image of {{ neighbor.username }}"
-                                         class="profile-pic-user">
-
-                                    <p>{{ neighbor.first_name }} {{ neighbor.last_name }}</p>
-                                </div>
-                            </a>
-
-                            <a href="{% url 'chat' username=neighbor.username %}"><i class="fa-solid fa-message fa-2x"></i></a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-                {#            <li class="user-list-item">#}
-                {#                <div class="user-name-picture">#}
-                {#                    <i class="fa-solid fa-user fa-2x"></i>#}
-                {#                <p>John Doe</p>#}
-                {#                </div>#}
-                {#                <i class="fa-solid fa-message fa-2x"></i>#}
-                {#            </li>#}
-                {#            <li class="user-list-item">#}
-                {#                <div class="user-name-picture">#}
-                {#                    <i class="fa-solid fa-user fa-2x"></i>#}
-                {#                <p>John Doe</p>#}
-                {#                </div>#}
-                {#                <i class="fa-solid fa-message fa-2x"></i>#}
-                {#            </li>#}
-            </ul>
         </div>
-        <button id="users-btn">Users</button>
+
+        {#        <div class="users-list" id="users-list">#}
+        {#            <h2>Users in your group: ({{ users_count }})</h2>#}
+        {#            <ul>#}
+        {#                {% for neighbor in users %}#}
+        {#                    {% if neighbor.pk != current_user.pk %}#}
+        {#                        <li class="user-list-item">#}
+        {#                            <a href="{% url 'profile page' pk=neighbor.pk %}">#}
+        {#                                <div class="user-name-picture">#}
+        {#                    <i class="fa-solid fa-user fa-2x"></i>#}
+        {#                                    <img src="{{ neighbor.profile_picture.url }}" alt="image of {{ neighbor.username }}"#}
+        {#                                         class="profile-pic-user">#}
+        {##}
+        {#                                    <p>{{ neighbor.first_name }} {{ neighbor.last_name }}</p>#}
+        {#                                </div>#}
+        {#                            </a>#}
+        {##}
+        {#                            <a href="{% url 'chat' username=neighbor.username %}"><i class="fa-solid fa-message fa-2x"></i></a>#}
+        {#                        </li>#}
+        {#                    {% endif %}#}
+        {#                {% endfor %}#}
+        {#            <li class="user-list-item">#}
+        {#                <div class="user-name-picture">#}
+        {#                    <i class="fa-solid fa-user fa-2x"></i>#}
+        {#                <p>John Doe</p>#}
+        {#                </div>#}
+        {#                <i class="fa-solid fa-message fa-2x"></i>#}
+        {#            </li>#}
+        {#            <li class="user-list-item">#}
+        {#                <div class="user-name-picture">#}
+        {#                    <i class="fa-solid fa-user fa-2x"></i>#}
+        {#                <p>John Doe</p>#}
+        {#                </div>#}
+        {#                <i class="fa-solid fa-message fa-2x"></i>#}
+        {#            </li>#}
+        {#            </ul>#}
+        {#        </div>#}
+        {#        <button id="users-btn">Users</button>#}
     </main>
 
 {% endblock %}

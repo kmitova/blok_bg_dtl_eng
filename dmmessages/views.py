@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect
 
@@ -18,21 +19,6 @@ def get_unread_messages(request):
     }
 
     return context
-
-
-@login_required
-def go_to_chat(request, slug):
-    """
-    - get username of logged in user
-    - get username of other user
-    - slug = username1+username2
-    - check if such chat exists by the slug: if not, make one and open it
-    - else: open the exisiting one
-    """
-
-    current_user = request.user
-    # other_user =
-    pass
 
 
 @login_required
@@ -59,6 +45,8 @@ def inbox_page(request):
             'messages': messages,
             'active_direct': active_direct
         }
+
+
 
     return render(request, 'messages/inbox.html', context)
 

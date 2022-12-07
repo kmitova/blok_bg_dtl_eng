@@ -17,12 +17,24 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('text',)
+        widgets = {
+            'text': forms.TextInput(
+                attrs={
+                    'placeholder': 'Add a comment...',
+                }
+            )}
 
 
 class ReplyForm(forms.ModelForm):
     class Meta:
         model = Reply
         fields = ('text',)
+        widgets = {
+            'text': forms.TextInput(
+                attrs={
+                    'placeholder': 'Add a reply...',
+                }
+            )}
 
 
 class AnnouncementForm(forms.ModelForm):

@@ -1,69 +1,69 @@
 
 
 {% load static %}
-<header class='header header-private'>
-    <div class="left-side">
-        {% if user.is_authenticated %}
-            <div class='title-logo'>
-                <a href="{% url 'home page' %}"><h3>BLOK
+
+<nav class="navbar navbar-expand-lg" style="background-color: #22c55e; color: white; padding: 1em;">
+  <div class="container-fluid" style="display:flex; align-items: center;">
+        {#    TITLE AND LOGO    #}
+      {% if user.is_authenticated %}
+            <div class='title-logo' style="margin-right: 50%;">
+                <a href="{% url 'home page' %}" style="color:white; text-decoration: none"><h3 style="display:flex; align-items: center;">BLOK
                     <span>{{ building_number }} </span>
                     <i class="fa-regular fa-building fa-lg"></i>
                 </h3></a>
             </div>
         {% else %}
-            <div class='title-logo'><a href="{% url 'landing page' %}"><h3>BLOK <span>bg</span>
+            <div class='title-logo'><a href="{% url 'landing page' %}" style="color:white; text-decoration: none"><h3>BLOK <span>bg</span>
 
                 <i class="fa-regular fa-building fa-lg"></i>
             </h3></a>
             </div>
         {% endif %}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         {% if user.is_authenticated %}
-            {% if is_dashboard %}
-                <form action="." class="search-form" method="get">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input name="query" type="text" placeholder="Search">
-                    <button type="submit">Search</button>
-                </form>
-            {% endif %}
-            </div>
-            <div class="right-side">
+        {#       SEARCH FORM     #}
+        {% if is_dashboard %}
+        <form class="d-flex" role="search" method="get">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
+        <button class="btn btn btn-outline-dark" type="submit">Search</button>
+      </form>
+        {% endif %}
 
-                <div class="profile-icons">
-                    <div class="icons" id="icons">
-                        <i class="fa-regular fa-xmark" id="close-icons-menu"></i>
-                        <a href="{% url 'inbox' %}"><i class="fa-solid fa-message fa-lg menu-icon"
+
+            {# ICONS #}
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="display:flex; align-items:center;">
+      <li class="nav-item" style="padding:1em;">
+            <a href="{% url 'make post' %}" style="color:white;"><i class="fa-solid fa-pen"></i>
+
+
+                        </a>
+        </li>
+        <li class="nav-item" style="padding:1em;">
+            <a href="{% url 'inbox' %}" style="color:white;"><i class="fa-solid fa-message fa-lg menu-icon"
                                                        id="message-icon"></i>
                             {% if unread_count %}
                                 <span class="badge">{{ unread_count }}</span>
                             {% endif %}
 
                         </a>
-                        <a href="{% url 'notifications' %}"><i class="fa-solid fa-bell fa-lg menu-icon"
+        </li>
+        <li class="nav-item" style="padding:1em;">
+            <a href="{% url 'notifications' %}" style="color:white;"><i class="fa-solid fa-bell fa-lg menu-icon"
                                                                id="bell-icon"></i>
                             {% if unread_notifications %}
                                 <span class="badge">{{ unread_notifications }}</span>
                             {% endif %}
                         </a>
-                        <i class="fa-solid fa-user fa-lg menu-icon" id="profile-icon"></i>
-
-                    </div>
-
-                    <i class="fa-solid fa-bars fa-lg" id="header-hamburger-menu"></i>
-                </div>
-                {#        <div class="profile-choices" id="profile-choices">#}
-                {#            <ul>#}
-                {#                <li><a href="">Profile</a></li>#}
-                {#                <li><a href="">Make Announcement</a></li>#}
-                {#                <li><a href="">Logout</a></li>#}
-                {#            </ul>#}
-                {#        </div>#}
-            </div>
-        {% endif %}
-</header>
-{% if user.is_authenticated %}
-    <div class="profile-choices" id="profile-choices">
-        <i class="fa-regular fa-xmark" id="profile-menu-close"></i>
-        <ul>
+        </li>
+        <li class="nav-item dropdown" style="padding:1em;">
+          <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0.1em .5em;">
+            <i class="fa-solid fa-user fa-lg menu-icon" id="profile-icon"></i>
+          </button>
+          <ul class="dropdown-menu">
+              <ul>
             <li><a href="{% url 'profile page' pk=user.pk %}">Profile</a></li>
             <li><a href="{% url 'payment' %}">Payment</a></li>
             {% if user.is_admin %}
@@ -73,5 +73,93 @@
             {% endif %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
+{#            <li><a class="dropdown-item" href="#"></a></li>#}
+{#            <li><a class="dropdown-item" href="#">Another action</a></li>#}
+{#            <li><hr class="dropdown-divider"></li>#}
+{#            <li><a class="dropdown-item" href="#">Something else here</a></li>#}
+          </ul>
+        </li>
+{#        <li class="nav-item">#}
+{#          <a class="nav-link disabled">Disabled</a>#}
+{#        </li>#}
+      </ul>
+    {% endif %}
     </div>
-{% endif %}
+  </div>
+</nav>
+
+
+{#<header class='header header-private'>#}
+{#    <div class="left-side">#}
+{#        {% if user.is_authenticated %}#}
+{#            <div class='title-logo'>#}
+{#                <a href="{% url 'home page' %}"><h3>BLOK#}
+{#                    <span>{{ building_number }} </span>#}
+{#                    <i class="fa-regular fa-building fa-lg"></i>#}
+{#                </h3></a>#}
+{#            </div>#}
+{#        {% else %}#}
+{#            <div class='title-logo'><a href="{% url 'landing page' %}"><h3>BLOK <span>bg</span>#}
+{##}
+{#                <i class="fa-regular fa-building fa-lg"></i>#}
+{#            </h3></a>#}
+{#            </div>#}
+{#        {% endif %}#}
+{#        {% if user.is_authenticated %}#}
+{#            {% if is_dashboard %}#}
+{#                <form action="." class="search-form" method="get">#}
+{#                    <i class="fa-solid fa-magnifying-glass"></i>#}
+{#                    <input name="query" type="text" placeholder="Search">#}
+{#                    <button type="submit">Search</button>#}
+{#                </form>#}
+{#            {% endif %}#}
+{#            </div>#}
+{#            <div class="right-side">#}
+{##}
+{#                <div class="profile-icons">#}
+{#                    <div class="icons" id="icons">#}
+{#                        <i class="fa-regular fa-xmark" id="close-icons-menu"></i>#}
+{#                        <a href="{% url 'inbox' %}"><i class="fa-solid fa-message fa-lg menu-icon"#}
+{#                                                       id="message-icon"></i>#}
+{#                            {% if unread_count %}#}
+{#                                <span class="badge">{{ unread_count }}</span>#}
+{#                            {% endif %}#}
+{##}
+{#                        </a>#}
+{#                        <a href="{% url 'notifications' %}"><i class="fa-solid fa-bell fa-lg menu-icon"#}
+{#                                                               id="bell-icon"></i>#}
+{#                            {% if unread_notifications %}#}
+{#                                <span class="badge">{{ unread_notifications }}</span>#}
+{#                            {% endif %}#}
+{#                        </a>#}
+{#                        <i class="fa-solid fa-user fa-lg menu-icon" id="profile-icon"></i>#}
+{##}
+{#                    </div>#}
+{##}
+{#                    <i class="fa-solid fa-bars fa-lg" id="header-hamburger-menu"></i>#}
+{#                </div>#}
+                {#        <div class="profile-choices" id="profile-choices">#}
+                {#            <ul>#}
+                {#                <li><a href="">Profile</a></li>#}
+                {#                <li><a href="">Make Announcement</a></li>#}
+                {#                <li><a href="">Logout</a></li>#}
+                {#            </ul>#}
+                {#        </div>#}
+{#            </div>#}
+{#        {% endif %}#}
+{#</header>#}
+{#{% if user.is_authenticated %}#}
+{#    <div class="profile-choices" id="profile-choices">#}
+{#        <i class="fa-regular fa-xmark" id="profile-menu-close"></i>#}
+{#        <ul>#}
+{#            <li><a href="{% url 'profile page' pk=user.pk %}">Profile</a></li>#}
+{#            <li><a href="{% url 'payment' %}">Payment</a></li>#}
+{#            {% if user.is_admin %}#}
+{#                <li><a href="{% url 'set payment' %}" class="open-modal-btn">Set Fee</a></li>#}
+{##}
+{#                <li><a href="{% url 'make announcement' %}">Make Announcement</a></li>#}
+{#            {% endif %}#}
+{#            <li><a href="{% url 'logout' %}">Logout</a></li>#}
+{#        </ul>#}
+{#    </div>#}
+{#{% endif %}#}

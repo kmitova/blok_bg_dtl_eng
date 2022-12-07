@@ -43,6 +43,18 @@
 {#            <div class="delete-icon"><i class="fa-solid fa-trash"><a href=""></a></i></div>#}
 {#        </li>#}
       </ul>
+        {% if notifications.has_previous %}
+                <a href="?page=1">&laquo First</a>
+                <a href="?page={{ notifications.previous_page_number }}">Previous</a>
+
+            {% endif %}
+            Page {{ notifications.number }} of {{ notifications.paginator.num_pages }}
+
+            {% if notifications.has_next %}
+                <a href="?page={{ notifications.next_page_number }}">Next</a>
+                <a href="?page={{ notifications.paginator.num_pages }}">Last &raquo</a>
+
+            {% endif %}
     </div>
 {% endblock %}
 

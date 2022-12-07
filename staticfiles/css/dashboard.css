@@ -11,15 +11,15 @@ main {
   position: relative;
 }
 
-.empty {
-  background-color: azure;
-  width: 400px;
-  height: 150vh;
-  margin: 0;
-  padding: 0;
-  border: 2px solid red;
-  z-index: -10;
-}
+/*.empty {*/
+/*  background-color: azure;*/
+/*  width: 400px;*/
+/*  height: 150vh;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  border: 2px solid red;*/
+/*  z-index: -10;*/
+/*}*/
 
 
 .posts {
@@ -30,6 +30,18 @@ main {
   width: 550px;
   border: 2px solid pink;
 
+
+}
+
+
+.users-modal {
+  margin-top: 1em;
+  margin-bottom: 2em;
+  text-align: center;
+}
+.support-btn a {
+  color: #52525b;
+  text-decoration: none;
 }
 
 .make-post-container {
@@ -97,6 +109,8 @@ main {
 .post-container {
   border: 2px solid green;
   color: #52525b;
+  margin-bottom: 1em;
+  border-radius: 10px;
 }
 .post-info {
   display: flex;
@@ -220,6 +234,14 @@ main {
   font-size: .9rem;
 }
 
+.comment-user-and-date p, .reply-user-and-date p{
+  margin: 0;
+}
+
+.comment {
+  border-radius: 10px;
+}
+
 .replies-link {
   color: #22c55e;
   text-decoration: none;
@@ -285,12 +307,12 @@ main {
 }
 
 .users-list {
-  border: 2px solid red;
-  background-color: #d1d5db;
-  height: 100%;
-  margin-left: 7em;
-  padding: 2em;
-  border-radius: 10px;
+  /*border: 2px solid red;*/
+  /*background-color: #d1d5db;*/
+  /*height: 100%;*/
+  /*margin-left: 7em;*/
+  /*padding: 2em;*/
+  /*border-radius: 10px;*/
 
   /*position: absolute;*/
   /*top: 50px;*/

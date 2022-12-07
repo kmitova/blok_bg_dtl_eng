@@ -18,7 +18,7 @@ def home_page(request):
     posts = get_group_posts(request).order_by('-publication_date')
     users_count = users.count() - 1
 
-    paginator = Paginator(posts, 2)
+    paginator = Paginator(posts, 10)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
 
@@ -49,7 +49,7 @@ def home_page(request):
 
 def notifications_page(request):
     notifications = Notification.objects.filter(user=request.user).order_by("-date")
-    paginator = Paginator(notifications, 2)
+    paginator = Paginator(notifications, 10)
     page = request.GET.get('page')
     notifications = paginator.get_page(page)
     for notification in notifications:
@@ -152,7 +152,7 @@ def make_post(request):
         'form': form
     }
 
-    return render(request, 'dashboard.html', context)
+    return render(request, 'partials/make-post.html', context)
 
 
 @login_required
@@ -189,15 +189,15 @@ def support_post(request, post_id):
     post = Post.objects.filter(pk=post_id).get()
     support_object = SupportPost.objects.filter(related_post_id=post_id).first()
 
-    if support_object:
-        support_object.delete()
-    else:
-        support = SupportPost(related_post=post)
-        support.save()
-        if post.user.pk != request.user.pk:
-            Notification.objects.create(user=post.user,
-                                        sender=request.user,
-                                        content=f"{request.user.first_name} {request.user.last_name} supported your post.")
+    # if support_object:
+    #     support_object.delete()
+    # else:
+    support = SupportPost(related_post=post)
+    support.save()
+    if post.user.pk != request.user.pk:
+        Notification.objects.create(user=post.user,
+                                    sender=request.user,
+                                    content=f"{request.user.first_name} {request.user.last_name} supported your post.")
 
     return redirect(request.META['HTTP_REFERER'] + f'#{post_id}')
 

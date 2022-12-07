@@ -8,6 +8,11 @@
   position: relative;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
 .title-logo {
   display: flex;
   flex-direction: row;

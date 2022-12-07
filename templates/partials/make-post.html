@@ -1,0 +1,25 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+{% block page-content %}
+    <div class="container">
+
+        <form action="{% url 'make post' %}" method="post" enctype="multipart/form-data"
+                                  class="form post-form">
+            <h1>Write a post:</h1>
+                                {% csrf_token %}
+                                {{ form }}
+{#                                <textarea id="outlined-basic" placeholder="Make a post..."></textarea>#}
+{#                                <div class="post-actions">#}
+{#                                    <button class='upload-btn'>Image</button>#}
+                                    <button type='submit' class="submit-post-btn">Post</button>
+{#                                </div>#}
+                            </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'scripts/app.js' %}" type="text/javascript"></script>
+{% endblock %}
