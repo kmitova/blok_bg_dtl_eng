@@ -37,6 +37,9 @@
   align-items: center;
 }
 
+
+
+
 label {
   font-weight: bold;
 }
@@ -52,6 +55,12 @@ label {
   align-items: center;
   gap: .5em;
   padding-bottom: .8em;
+}
+
+.form-item input {
+  border: 1px solid rgba(163, 163, 163, .5);
+  border-radius: 4px;
+
 }
 
 .pay-btn {

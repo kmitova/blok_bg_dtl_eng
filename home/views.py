@@ -172,7 +172,7 @@ def make_announcement(request):
                     Notification.objects.create(user=user,
                                                 sender=request.user,
                                                 content=f"Announcement from admin {request.user.first_name} {request.user.last_name}: "
-                                                        f"{post.title} \n "
+                                                        f"{post.title}: \n "
                                                         f"{post.content}")
 
             return redirect('home page')

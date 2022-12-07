@@ -1,3 +1,16 @@
+.verify-title {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.delete-profile-form input {
+  border: 1px solid rgba(163, 163, 163, .5);
+  border-radius: 4px;
+
+}
+
+
+
 .delete-profile-form {
   padding: 3em;
   border-radius: 10px;

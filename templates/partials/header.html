@@ -13,9 +13,9 @@
                 </h3></a>
             </div>
         {% else %}
-            <div class='title-logo'><a href="{% url 'landing page' %}" style="color:white; text-decoration: none"><h3>BLOK <span>bg</span>
+            <div class='title-logo'><a href="{% url 'landing page' %}" style="color:white; text-decoration: none;"><h3>BLOK <span>bg</span>
 
-                <i class="fa-regular fa-building fa-lg"></i>
+                <i class="fa-regular fa-building fa-lg" style="margin-top:.4em"></i>
             </h3></a>
             </div>
         {% endif %}
@@ -43,19 +43,17 @@
         </li>
         <li class="nav-item" style="padding:1em;">
             <a href="{% url 'inbox' %}" style="color:white;"><i class="fa-solid fa-message fa-lg menu-icon"
-                                                       id="message-icon"></i>
-                            {% if unread_count %}
-                                <span class="badge">{{ unread_count }}</span>
-                            {% endif %}
+                                                       id="message-icon" style="{% if unread_count %} color:red; {% endif %}"></i>
+{#                            {% if unread_count %}#}
+{#                                <span class="badge">{{ unread_count }}</span>#}
+{#                            {% endif %}#}
 
                         </a>
         </li>
         <li class="nav-item" style="padding:1em;">
             <a href="{% url 'notifications' %}" style="color:white;"><i class="fa-solid fa-bell fa-lg menu-icon"
-                                                               id="bell-icon"></i>
-                            {% if unread_notifications %}
-                                <span class="badge">{{ unread_notifications }}</span>
-                            {% endif %}
+                                                               id="bell-icon" style="{% if unread_notifications %} color:red; {% endif %}"></i>
+
                         </a>
         </li>
         <li class="nav-item dropdown" style="padding:1em;">

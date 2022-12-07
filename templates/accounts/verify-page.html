@@ -7,7 +7,7 @@
 {% block page-content %}
     <div class="container">
       <div class="verify-container">
-        <h2>Before deleting your profile, please verify that it's you:</h2>
+        <h2 class="verify-title">Before deleting your profile, please verify that it's you:</h2>
         <form action="{% url 'delete profile' pk=request.user.pk %}" method="post" class="delete-profile-form">
 {#          <input type="password" name="password" id="password" placeholder="Enter password"/>#}
             {% csrf_token %}

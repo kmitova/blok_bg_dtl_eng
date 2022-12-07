@@ -1,11 +1,12 @@
 .inbox-container {
   height: 100%;
-  width: 100vw;
+  width: 100%;
   padding-top: 4em;
   display: flex;
   align-items: center;
   flex-direction: column;
   font-family: 'Montserrat', sans-serif;
+
 }
 
 .inbox-search-form {

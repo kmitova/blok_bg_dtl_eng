@@ -9,7 +9,7 @@
                 This month's fee is $<span class="fee-amount">{{ fee_amount }}</span>.
             </h2>
             <h3 class="deadline">
-                The deadline for payment is <span class="deadline-date">{{ fee_deadline }}</span>.
+                The deadline for payment is  {{ fee_deadline }}.
             </h3>
         </div>
         <form action="{% url 'payment' %}" method="post" class="payment-form">

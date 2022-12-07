@@ -4,7 +4,8 @@
 
 {% block page-content %}
     <div class="container">
-      <form action="{% url 'edit profile' pk=object.pk %}" method="post" enctype="multipart/form-data" class="form post-form" class="edit-form">
+    <div class="profile-container">
+              <form action="{% url 'edit profile' pk=object.pk %}" method="post" enctype="multipart/form-data" class="form post-form" class="edit-form">
         {% csrf_token %}
           <h2>Edit Profile:</h2>
         <div class="item">
@@ -45,6 +46,8 @@
         </div>
         <button class="save-btn">Save Changes</button>
       </form>
+
+    </div>
     </div>
 
 {% endblock %}

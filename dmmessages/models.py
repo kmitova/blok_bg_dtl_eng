@@ -59,6 +59,7 @@ class ChatMessage(models.Model):
         messages = ChatMessage.objects.filter(user=user).\
             values('recipient').annotate(last=Max('date')).\
             order_by('-last')
+
         for message in messages:
             users.append({
                 'user': UserModel.objects.get(pk=message['recipient']),

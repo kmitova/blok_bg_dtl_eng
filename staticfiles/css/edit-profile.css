@@ -32,6 +32,13 @@ input {
   margin: auto;
 }
 
+.item input {
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+  margin: .7em;
+
+}
+
 .save-btn {
   background-color: #22c55e;
   border: none;

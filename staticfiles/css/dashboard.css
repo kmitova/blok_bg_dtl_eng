@@ -1,8 +1,10 @@
-main {
+.main {
   /*margin-left: 1em;*/
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 1em;
+  /*height: 100vh;*/
 
   justify-content: center;
   /*height: 100vh;*/
@@ -28,7 +30,7 @@ main {
   /*flex-direction: column;*/
   /*gap: 1em;*/
   width: 550px;
-  border: 2px solid pink;
+  /*border: 2px solid pink;*/
 
 
 }

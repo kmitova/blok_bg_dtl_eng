@@ -11,7 +11,7 @@
         <div class="chat-feed">
           <h3 class="chat-title">{{ direct.sender.first_name }} {{ direct.sender.last_name }}</h3>
             {% for direct in directs %}
-          <div class="chat-message chat-left">
+          <div class="{% if direct.sender.pk == request.user.pk %}chat-message chat-right {% else %} chat-message chat-left {% endif %}">
             <img src="{{ sender.profile_picture.url }}" alt="" class="chat-sender-img"/>
             <div class="chat-message-content-div">
               <p class="chat-message-content">{{ direct.body }}</p>
@@ -44,7 +44,7 @@
             {% csrf_token %}
             <input type="hidden" name="to_user" value="{{ active_direct }}">
 
-        <input id="outlined-basic" placeholder="Message" name="body"/>
+        <input id="outlined-basic" placeholder="Message" name="body" class="send-message"/>
         <div class="post-actions">
           <button type="submit" class="send-chat-btn">Send</button>
         </div>

@@ -6,7 +6,11 @@
 
     <div class="notifications-container">
       <h2 class="notifications-title">Notifications <i class="fa-solid fa-bell"></i></h2>
+    {% if not notifications %}
+        <h4>No notifications yet.</h4>
+    {% else %}
       <ul class="notifications-list">
+
 {#        <li class="notification-item">#}
 {#            <div class="notification-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" width="40"/></div>#}
 {#            <div class="notif-title-and-content">#}
@@ -25,12 +29,12 @@
 {#        </li>#}
           {% for notification in notifications %}
         <li class="notification-item">
-            <div class="notification-img"><img src="{{ notification.sender.profile_picture.url }}" alt="" width="40" /></div>
+            <div class="notification-img"><img src="{{ notification.sender.profile_picture.url }}" alt="" style="width: 40px; height: 40px" /></div>
             <div class="notif-title-and-content">
               <p class="notif-title">{{ notification.content }}</p>
               <p class="notif-date">{{ notification.date }}</p>
             </div>
-            <div class="delete-icon"><a href="{% url 'delete notification' notification_id=notification.pk %}"><i class="fa-solid fa-trash"></i></a></div>
+            <div class="delete-icon" style="margin-right: 1em;"><a href="{% url 'delete notification' notification_id=notification.pk %}"><i class="fa-solid fa-trash"></i></a></div>
         </li>
           {% endfor %}
 {#        <li class="notification-item">#}
@@ -43,6 +47,8 @@
 {#            <div class="delete-icon"><i class="fa-solid fa-trash"><a href=""></a></i></div>#}
 {#        </li>#}
       </ul>
+    {% endif %}
+    {% if notifications %}
         {% if notifications.has_previous %}
                 <a href="?page=1">&laquo First</a>
                 <a href="?page={{ notifications.previous_page_number }}">Previous</a>
@@ -55,6 +61,7 @@
                 <a href="?page={{ notifications.paginator.num_pages }}">Last &raquo</a>
 
             {% endif %}
+    {% endif %}
     </div>
 {% endblock %}
 
