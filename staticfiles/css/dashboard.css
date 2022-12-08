@@ -217,7 +217,7 @@
 .comment-info, .reply-info {
   display: flex;
   flex-direction: row;
-  border: 1px solid blue;
+  /*border: 1px solid blue;*/
   align-items: center;
   gap: .2em;
 
@@ -254,7 +254,7 @@
 .reply {
   background-color: white;
   margin: .5em;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 .reply-form {

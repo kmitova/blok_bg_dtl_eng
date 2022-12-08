@@ -7,8 +7,9 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
 from core.utils import get_group_users, get_group_posts
-from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm, PostEditForm, PostDeleteForm
-from home.models import Post, Comment, SupportPost, Notification
+from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm, PostEditForm, PostDeleteForm, \
+    CommentEditForm, CommentDeleteForm, ReplyEditForm, ReplyDeleteForm
+from home.models import Post, Comment, SupportPost, Notification, Reply
 
 UserModel = get_user_model()
 
@@ -45,7 +46,6 @@ def home_page(request):
 
 def posts_page(request):
     posts = Post.objects.filter(user=request.user).order_by('-publication_date')
-
 
     paginator = Paginator(posts, 5)
     page = request.GET.get('page')
@@ -122,6 +122,43 @@ def edit_post(request, post_id):
     return render(request, 'partials/post-edit.html', context)
 
 
+@login_required
+def edit_comment(request, comment_id):
+    comment = Comment.objects.filter(pk=comment_id).get()
+    if request.method == "GET":
+        form = CommentEditForm(instance=comment)
+    else:
+        form = CommentEditForm(request.POST, request.FILES, instance=comment)
+        if form.is_valid():
+            comment = form.save()
+            return redirect('home page')
+
+    context = {
+        'form': form,
+        'comment_id': comment_id
+    }
+    return render(request, 'partials/comment-edit.html', context)
+
+
+@login_required
+def edit_reply(request, reply_id):
+    reply = Reply.objects.filter(pk=reply_id).get()
+    if request.method == "GET":
+        form = ReplyEditForm(instance=reply)
+    else:
+        form = ReplyEditForm(request.POST, request.FILES, instance=reply)
+        if form.is_valid():
+            reply = form.save()
+            return redirect('home page')
+
+    context = {
+        'form': form,
+        'reply_id': reply_id
+    }
+    return render(request, 'partials/reply-edit.html', context)
+
+
+@login_required
 def delete_post(request, post_id):
     post = Post.objects.filter(pk=post_id).get()
     if request.method == "GET":
@@ -140,7 +177,44 @@ def delete_post(request, post_id):
 
     return render(request, 'partials/delete-post.html', context)
 
+@login_required
+def delete_comment(request, comment_id):
+    comment = Comment.objects.filter(pk=comment_id).get()
+    if request.method == "GET":
+        form = CommentDeleteForm(instance=comment)
+    else:
+        form = CommentDeleteForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('posts page')
 
+    context = {
+        'form': form,
+        'comment_id': comment_id
+
+    }
+
+    return render(request, 'partials/delete-comment.html', context)
+
+
+@login_required
+def delete_reply(request, reply_id):
+    reply = Reply.objects.filter(pk=reply_id).get()
+    if request.method == "GET":
+        form = ReplyDeleteForm(instance=reply)
+    else:
+        form = ReplyDeleteForm(request.POST, instance=reply)
+        if form.is_valid():
+            form.save()
+            return redirect('posts page')
+
+    context = {
+        'form': form,
+        'reply_id': reply_id
+
+    }
+
+    return render(request, 'partials/delete-reply.html', context)
 
 def delete_notification(request, notification_id):
     notification = Notification.objects.filter(pk=notification_id).get()

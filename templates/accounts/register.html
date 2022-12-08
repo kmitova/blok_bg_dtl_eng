@@ -10,12 +10,12 @@
         {% csrf_token %}
         <div class="form-field">
 {#            <input type="text" id="first-name" placeholder="First name" required>#}
-            {{ from.first_name.errors }}
+            {{ form.first_name.errors }}
             {{ form.first_name|placeholder:"First Name" }}
         </div>
     <div class="form-field">
 {#            <input type="text" id="last-name" placeholder="Last name" required>#}
-        {{ from.last_name.errors }}
+        {{ form.last_name.errors }}
         {{ form.last_name|placeholder:"Last Name" }}
         </div>
     <div class="form-field">

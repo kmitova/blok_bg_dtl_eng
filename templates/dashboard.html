@@ -79,6 +79,13 @@
             {% endif %}
             {% for post in posts %}
                 <div class="post-container">
+                {% if post.user == request.user %}
+            <div class="actions" style="display:flex; justify-content: flex-end; gap: 1em;">
+                        <a href="{% url 'edit post' post_id=post.id %}" style="color: #a3a3a3;"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{% url 'delete post' post_id=post.id %}" style="color: #a3a3a3;"><i class="fa-solid fa-trash"></i></a>
+
+                    </div>
+            {% endif %}
                     <div class="post-info">
                         <div class="user-img">
                             <a href="{% url 'profile page' pk=post.user.pk %}">

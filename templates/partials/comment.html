@@ -1,7 +1,9 @@
 {% load static %}
 
 <div class="comment">
+
       <div class="comment-info">
+
         <div class="user-img">
             <a href="{% url 'profile page' pk=comment.user.pk %}">
                 <img src="{{ comment.user.profile_picture.url }}" alt="image of {{ user.username }}" class="profile-pic-comment">
@@ -11,7 +13,15 @@
           <p class="comment-author">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
           <p class="comment-date">{{ comment.publication_date }}</p>
         </div>
+          {% if comment.user == request.user %}
+            <div class="actions" style="display:flex; justify-content: flex-end; gap: 1em; margin-left: auto;">
+                        <a href="{% url 'edit comment' comment_id=comment.id %}" style="color: #a3a3a3;"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{% url 'delete comment' comment_id=comment.id %}" style="color: #a3a3a3;"><i class="fa-solid fa-trash"></i></a>
+
+                    </div>
+            {% endif %}
       </div>
+
       <div class="comment-content">
         <p class="comment-text">{{ comment.text }}</p>
         <p class="replies-count">
@@ -58,7 +68,15 @@
                         <p class="reply-author">{{ reply.user.first_name }} {{ reply.user.last_name }}</p>
                          <p class="reply-date">{{ reply.publication_date }}</p>
                                 </div>
+                    {% if reply.user == request.user %}
+            <div class="actions" style="display:flex; justify-content: flex-end; gap: 1em; margin-left: auto;">
+                        <a href="{% url 'edit reply' reply_id=reply.id %}" style="color: #a3a3a3;"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{% url 'delete reply' reply_id=reply.id %}" style="color: #a3a3a3;"><i class="fa-solid fa-trash"></i></a>
+
+                    </div>
+            {% endif %}
                           </div>
+
                 <div class="reply-content">{{ reply.text }}</div>
                  </div>
             {% endfor %}

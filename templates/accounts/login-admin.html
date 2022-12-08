@@ -9,6 +9,7 @@
         <form method="post" action="{% url 'login admin' %}" class="account-form login-form">
             {% csrf_token %}
             <div class="form-field">
+                {{ form.username.errors }}
                 {{ form.username|placeholder:"Username" }}
 {#                <input type="text" id="username" placeholder="Username" required>#}
             </div>
@@ -17,7 +18,7 @@
 {#                <input type="number" id="admin-code" placeholder="Admin code" required>#}
 {#            </div>#}
             <div class="form-field">
-
+                {{ form.password.errors }}
                 {{ form.password|placeholder:"Password" }}
 {#                <input type="password" id="password" placeholder="Password" required>#}
             </div>
