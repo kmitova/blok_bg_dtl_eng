@@ -3,9 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView
 
 from core.utils import get_group_users, get_group_posts
-from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm
+from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm, PostEditForm, PostDeleteForm
 from home.models import Post, Comment, SupportPost, Notification
 
 UserModel = get_user_model()
@@ -42,14 +44,17 @@ def home_page(request):
 
 
 def posts_page(request):
-    posts = Post.objects.filter(user=request.user)
+    posts = Post.objects.filter(user=request.user).order_by('-publication_date')
+
 
     paginator = Paginator(posts, 5)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
 
     context = {
-        'posts': posts
+        'posts': posts,
+        'comment_form': CommentForm(),
+        'reply_form': ReplyForm(),
     }
 
     return render(request, 'partials/posts.html', context)
@@ -98,6 +103,42 @@ def get_building_number(request):
 
     return context
 
+
+@login_required
+def edit_post(request, post_id):
+    post = Post.objects.filter(pk=post_id).get()
+    if request.method == "GET":
+        form = PostEditForm(instance=post)
+    else:
+        form = PostEditForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save()
+            return redirect('posts page')
+
+    context = {
+        'form': form,
+        'post_id': post_id
+    }
+    return render(request, 'partials/post-edit.html', context)
+
+
+def delete_post(request, post_id):
+    post = Post.objects.filter(pk=post_id).get()
+    if request.method == "GET":
+        form = PostDeleteForm(instance=post)
+    else:
+        form = PostDeleteForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('posts page')
+
+    context = {
+        'form': form,
+        'post_id': post_id
+
+    }
+
+    return render(request, 'partials/delete-post.html', context)
 
 
 

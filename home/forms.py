@@ -1,6 +1,6 @@
 from django import forms
 
-from home.models import Post, Comment, Reply, Announcement
+from home.models import Post, Comment, Reply, Announcement, SupportPost
 
 
 class PostBaseForm(forms.ModelForm):
@@ -13,6 +13,24 @@ class PostCreateForm(PostBaseForm):
     pass
 
 
+class PostDeleteForm(PostBaseForm):
+    def save(self, commit=True):
+        if commit:
+            # self.instance.comments.clear()
+            SupportPost.objects.filter(id=self.instance.id).delete()
+            Comment.objects.filter(post_id=self.instance.id).delete()
+
+            self.instance.delete()
+        else:
+            pass
+        return self.instance
+
+
+class PostEditForm(PostBaseForm):
+    pass
+    # class Meta:
+    #     model = Post
+    #     exclude = ('publication_date', 'photo')
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

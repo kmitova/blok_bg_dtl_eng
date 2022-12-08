@@ -18,9 +18,18 @@
 
             {% endif %}
         </div>
-
+    {% if not posts %}
+        <h2>No Posts Yet.</h2>
+    {% else %}
     {% for post in posts %}
             <div class="post-container" style="width: 60%; margin:auto; padding: 1em; margin-top:2em;">
+            {% if post.user == request.user %}
+            <div class="actions" style="display:flex; justify-content: flex-end; gap: 1em;">
+                        <a href="{% url 'edit post' post_id=post.id %}" style="color: #a3a3a3;"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{% url 'delete post' post_id=post.id %}" style="color: #a3a3a3;"><i class="fa-solid fa-trash"></i></a>
+
+                    </div>
+            {% endif %}
                     <div class="post-info">
                         <div class="user-img">
                             <a href="{% url 'profile page' pk=post.user.pk %}">
@@ -34,6 +43,7 @@
                             <p class="post-date">{{ post.publication_date }}</p>
                         </div>
                     </div>
+
                     <div class="post-content">
                         <p class="post-text">
                             {{ post.content }}
@@ -76,7 +86,7 @@
                     </div>
                     <div class="make-comment-container">
                         <form action="{% url 'comment post' post_id=post.pk %}" method="post">
-                            {#                        <input placeholder="Add a comment..."/>#}
+{#                                                    <input placeholder="Add a comment..."/>#}
                             {{ comment_form.text }}
                             {% csrf_token %}
                             <div class="post-actions">
@@ -89,7 +99,7 @@
                 </div>
 
         {% endfor %}
-
+    {% endif %}
     </div>
 
 
