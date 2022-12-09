@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect
 
-from dmmessages.models import Chat, ChatMessage
+from dmmessages.models import ChatMessage
 
 UserModel = get_user_model()
 

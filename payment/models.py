@@ -21,6 +21,8 @@ class Fee(models.Model):
         blank=False
     )
 
+    class Meta:
+        ordering = ['-deadline']
 
 
 class Payment(models.Model):

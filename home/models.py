@@ -92,6 +92,7 @@ class Reply(models.Model):
 
     class Meta:
         ordering = ['publication_date']
+        verbose_name_plural = 'Replies'
 
 
 class SupportPost(models.Model):
