@@ -43,7 +43,7 @@
         </li>
         <li class="nav-item" style="padding:1em;">
             <a href="{% url 'inbox' %}" style="color:white;"><i class="fa-solid fa-message fa-lg menu-icon"
-                                                       id="message-icon" style="{% if unread_count %} color:red; {% endif %}"></i>
+                                                       id="message-icon" style="">{% if unread_count %}{{ unread_count }} {% endif %}</i>
 {#                            {% if unread_count %}#}
 {#                                <span class="badge">{{ unread_count }}</span>#}
 {#                            {% endif %}#}
@@ -51,8 +51,8 @@
                         </a>
         </li>
         <li class="nav-item" style="padding:1em;">
-            <a href="{% url 'notifications' %}" style="color:white;"><i class="fa-solid fa-bell fa-lg menu-icon"
-                                                               id="bell-icon" style="{% if unread_notifications %} color:red; {% endif %}"></i>
+            <a href="{% url 'notifications' %}" style="color:white; text-decoration: none;"><i class="fa-solid fa-bell fa-lg menu-icon"
+                                                               id="bell-icon" style="">{% if unread_notifications %}{{ unread_notifications }}{% endif %}</i>
 
                         </a>
         </li>

@@ -13,10 +13,12 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = LIST_FILTER
 
 
+
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('publication_date', 'post', 'user')
+    list_display = ('publication_date', 'post_id', 'user')
     list_filter = LIST_FILTER
+
 
 @admin.register(Reply)
 class ReplyAdmin(admin.ModelAdmin):
@@ -38,3 +40,4 @@ class NotificationAdmin(admin.ModelAdmin):
 @admin.register(Announcement)
 class AnnouncementAdmin(admin.ModelAdmin):
     list_display = ('title', 'user')
+    search_fields = ('title__startswith',)
