@@ -75,7 +75,6 @@ def notifications_page(request):
         'notifications': notifications
     }
 
-
     return render(request, 'notifications.html', context)
 
 

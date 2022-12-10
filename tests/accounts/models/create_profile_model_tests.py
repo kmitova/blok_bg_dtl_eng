@@ -6,17 +6,7 @@ from accounts.models import AppUser
 
 
 class AppUserModelTests(TestCase):
-    # VALID_USER_DATA = {
-    #     'first_name': 'Test',
-    #     'last_name': 'User',
-    #     'username': 'testuser',
-    #     'building_code': '1166',
-    #     'email': 'testuser@mail.com',
-    #     'password1': 'thisisapassword12',
-    #     'password2': 'thisisapassword12',
-    # }
-
-    def test_profile_create_valid_data(self):
+    def test_profile_create_valid_data_valid_code_length(self):
         u = AppUser(
             first_name='Test',
             last_name='User',
@@ -24,7 +14,6 @@ class AppUserModelTests(TestCase):
             building_code=1166,
             email='testuser@mail.com',
             password='thisisapassword12',
-            # password2='thisisapassword12',
         )
         u.full_clean()
         u.save()
@@ -38,7 +27,6 @@ class AppUserModelTests(TestCase):
             building_code=0000,
             email='testuser@mail.com',
             password='thisisapassword12',
-            # password2='thisisapassword12',
         )
         try:
             u.full_clean()
@@ -47,32 +35,16 @@ class AppUserModelTests(TestCase):
         except ValidationError as e:
             self.assertIsNotNone(e)
 
-    def test_profile_admin_create_valid_data(self):
-        u = AppUser(
-            first_name='Test',
-            last_name='User',
-            username='testuser',
-            building_code=1166,
-            email='testuser@mail.com',
-            password='thisisapassword12',
-            is_admin=True,
-            admin_code=1234
-            # password2='thisisapassword12',
-        )
-        u.full_clean()
-        u.save()
-        self.assertIsNotNone(u)
-
     def test_profile_admin_create_invalid_data_admin_code_invalid_length(self):
         u = AppUser(
             first_name='Test',
             last_name='User',
             username='testuser',
-            building_code=1166,
+            building_code=116,
             email='testuser@mail.com',
             password='thisisapassword12',
             is_admin=True,
-            admin_code=123467
+            admin_code=1234
         )
         try:
             u.full_clean()
