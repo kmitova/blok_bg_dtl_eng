@@ -1,10 +1,9 @@
 from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth.hashers import check_password
 from django.utils import timezone
 
-from accounts.templatetags.custom_filters import placeholder
 
 UserModel = get_user_model()
 
@@ -79,6 +78,14 @@ class UserLoginForm(AuthenticationForm):
         self.fields['password'].widget.attrs.update(
             {'placeholder': 'Password'}
     )
+
+    def clean_username(self, *args, **kwargs):
+        username = self.cleaned_data['username']
+        existing = UserModel.objects.filter(username=username).exists()
+        if not existing:
+            raise forms.ValidationError("Invalid username!")
+        return username
+
 
 
 # class AdminUserLoginForm(forms.ModelForm):
