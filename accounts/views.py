@@ -1,16 +1,20 @@
+import logging
+
 from django.contrib import messages
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django.http import request
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import views as auth_views
 from django.views.generic import DetailView, UpdateView
 
-from accounts.forms import UserCreateForm, UserLoginForm, AdminUserLoginForm, AdminUserCreateForm, DeleteProfileForm
+from accounts.forms import UserCreateForm, UserLoginForm, AdminUserCreateForm, DeleteProfileForm
 from core.utils import get_date_joined
 
 UserModel = get_user_model()
+logger = logging.getLogger('main')
 
 
 class UserRegisterView(views.CreateView):
@@ -33,10 +37,10 @@ class UserLoginView(auth_views.LoginView):
     next_page = reverse_lazy('home page')
 
 
-class AdminUserLoginView(auth_views.LoginView):
-    form_class = AdminUserLoginForm
-    template_name = 'accounts/login-admin.html'
-    next_page = reverse_lazy('home page')
+# class AdminUserLoginView(auth_views.LoginView):
+#     form_class = UserLoginForm
+#     template_name = 'accounts/login-admin.html'
+#     next_page = reverse_lazy('home page')
 
 
 class UserLogoutView(auth_views.LogoutView):
@@ -48,15 +52,16 @@ class ProfileDetailsView(DetailView):
     model = UserModel
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        """
-        date joined, name, number of posts, flat number, blok number
-        """
-        context["posts_count"] = self.object.post_set.count()
-        context['is_owner'] = self.request.user == self.object
-        context['blok_number'] = str(self.object.building_code)[2:]
-        context['date_joined'] = get_date_joined(self.object.date_joined)
-        print(context)
+        context = {}
+        try:
+            context = super().get_context_data(**kwargs)
+            context["posts_count"] = self.object.post_set.count()
+            context['is_owner'] = self.request.user == self.object
+            context['blok_number'] = str(self.object.building_code)[2:]
+            context['date_joined'] = get_date_joined(self.object.date_joined)
+        except Exception as e:
+            print(e)
+            logging.debug('User does not exist')
         return context
 
 
@@ -65,11 +70,11 @@ class ProfileEditView(UpdateView):
     model = UserModel
     fields = ('first_name', 'last_name', 'email', 'apartment_number', 'username', 'profile_picture')
 
-
     def get_success_url(self):
         return reverse_lazy('profile page', kwargs={
             'pk': self.request.user.pk
         })
+
 
 class DeleteProfileView(UpdateView):
     form_class = DeleteProfileForm
@@ -82,19 +87,22 @@ class DeleteProfileView(UpdateView):
         return self.request.user
 
 
-def change_password(request, pk):
+def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Important!
+            update_session_auth_hash(request, user)
             messages.success(request, 'Your password was successfully updated!')
             return redirect('home page')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'accounts/change-password.html', {
+
+    context = {
         'form': form
-    })
+    }
+
+    return render(request, 'accounts/change-password.html', context)
 

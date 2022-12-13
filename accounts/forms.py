@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth.hashers import check_password
 from django.utils import timezone
@@ -10,9 +10,11 @@ UserModel = get_user_model()
 
 class DeleteProfileForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput())
+
     class Meta:
         model = UserModel
         fields = ('confirm_password',)
+
     def clean(self):
         cleaned_data = super(DeleteProfileForm, self).clean()
         confirm_password = cleaned_data.get('confirm_password')
@@ -23,7 +25,6 @@ class DeleteProfileForm(forms.ModelForm):
         user = super(DeleteProfileForm, self).save(commit)
         user.last_login = timezone.now()
         if commit:
-            # TODO: delete all associated data as well (posts, comments, etc)
             self.instance.delete()
 
         return self.instance
@@ -60,14 +61,6 @@ class AdminUserCreateForm(UserCreationForm):
                   'password1', 'password2')
 
         is_admin = forms.BooleanField(label="I confirm I am an admin.")
-        # widgets = {
-        #     'is_admin': forms.HiddenInput(
-        #         attrs={
-        #             'value': True
-        #         }
-        #     )
-        # }
-
 
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -86,27 +79,19 @@ class UserLoginForm(AuthenticationForm):
             raise forms.ValidationError("Invalid username!")
         return username
 
+    # def clean_password(self, *args, **kwargs):
+    #     password = self.cleaned_data['password']
+        # if check_password(password, request.user.password):
 
 
-# class AdminUserLoginForm(forms.ModelForm):
-#     # def __init__(self, *args, **kwargs):
-#     #     self.request = kwargs.pop('request', None)
-#     #     super().__init__(*args, **kwargs)
+
+
 #
-#     class Meta:
-#         model = UserModel
-#         fields = ('username', 'admin_code', 'password')
-#         widgets = {
-#             'password': forms.PasswordInput()
-#         }
-
-
-class AdminUserLoginForm(AuthenticationForm):
-    username = UsernameField(
-        widget=forms.TextInput(attrs={'placeholder': 'Username'})
-    )
-    # admin_code = forms.NumberInput(attrs={'placeholder': 'Admin Code'})
-    password = forms.CharField(
-        strip=False,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Password'})
-    )
+# class AdminUserLoginForm(AuthenticationForm):
+#     username = UsernameField(
+#         widget=forms.TextInput(attrs={'placeholder': 'Username'})
+#     )
+#     password = forms.CharField(
+#         strip=False,
+#         widget=forms.PasswordInput(attrs={'placeholder': 'Password'})
+#     )

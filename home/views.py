@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views.generic import UpdateView
+
 
 from core.utils import get_group_users, get_group_posts
 from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm, PostEditForm, PostDeleteForm, \
@@ -214,6 +213,7 @@ def delete_reply(request, reply_id):
     }
 
     return render(request, 'partials/delete-reply.html', context)
+
 
 def delete_notification(request, notification_id):
     notification = Notification.objects.filter(pk=notification_id).get()

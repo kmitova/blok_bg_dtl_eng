@@ -1,6 +1,6 @@
 .container-404 {
   height: 100%;
-  width: 100vw;
+  width: 100%;
   padding-top: 8em;
   display: flex;
   align-items: center;
@@ -26,6 +26,7 @@
 .return-link {
   font-weight: bold;
   font-size: 2rem;
+  border: none;
 }
 
 

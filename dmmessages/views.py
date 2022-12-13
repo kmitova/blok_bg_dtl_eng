@@ -46,8 +46,6 @@ def inbox_page(request):
             'active_direct': active_direct
         }
 
-
-
     return render(request, 'messages/inbox.html', context)
 
 
@@ -56,7 +54,6 @@ def send_message(request):
     from_user = request.user
     to_user_username = request.POST.get('to_user')
     body = request.POST.get('body')
-    print(body)
     if request.method == 'POST':
         to_user = UserModel.objects.get(username=to_user_username)
         ChatMessage.send_message(from_user, to_user, body)
@@ -73,7 +70,6 @@ def chat_page(request, username):
     directs = ChatMessage.objects.filter(user=user, recipient__username=username)
     directs.update(is_read=True)
     recipient = UserModel.objects.filter(username=username).get()
-    context = {}
 
     # if messages:
     #     message = messages[0]
