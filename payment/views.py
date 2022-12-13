@@ -1,7 +1,9 @@
 import datetime
 
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
@@ -56,6 +58,7 @@ def pay_page(request):
         'fee_amount': last_fee.fee,
         'fee_deadline': last_fee.deadline
     }
+
     return render(request, 'payment/payment-page.html', context)
 
 

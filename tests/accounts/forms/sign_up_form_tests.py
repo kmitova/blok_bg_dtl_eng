@@ -17,7 +17,6 @@ class SignUpProfileFormTest(TestCase):
         form = UserCreateForm(valid_user_data)
         self.assertTrue(form.is_valid())
 
-
     def test_profile_form_invalid_data_passwords_invalid_code_length(self):
         valid_user_data = {
             'first_name': 'Test',

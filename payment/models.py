@@ -13,7 +13,8 @@ class Fee(models.Model):
         max_digits=5,
         decimal_places=2,
         null=False,
-        blank=False
+        blank=False,
+        default=10,
     )
 
     deadline = models.DateField(
