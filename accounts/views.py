@@ -37,12 +37,6 @@ class UserLoginView(auth_views.LoginView):
     next_page = reverse_lazy('home page')
 
 
-# class AdminUserLoginView(auth_views.LoginView):
-#     form_class = UserLoginForm
-#     template_name = 'accounts/login-admin.html'
-#     next_page = reverse_lazy('home page')
-
-
 class UserLogoutView(auth_views.LogoutView):
     next_page = reverse_lazy('landing page')
 

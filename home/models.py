@@ -6,11 +6,9 @@ UserModel = get_user_model()
 
 
 class Post(models.Model):
-    # MAX_CONTENT_LEN = 1000
     MIN_CONTENT_LEN = 2
 
     content = models.TextField(
-        # max_length=MAX_CONTENT_LEN,
         validators=(
             validators.MinLengthValidator(MIN_CONTENT_LEN),
         ),

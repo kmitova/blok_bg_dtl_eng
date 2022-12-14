@@ -16,7 +16,6 @@ class PostCreateForm(PostBaseForm):
 class PostDeleteForm(PostBaseForm):
     def save(self, commit=True):
         if commit:
-            # self.instance.comments.clear()
             SupportPost.objects.filter(id=self.instance.id).delete()
             Comment.objects.filter(post_id=self.instance.id).delete()
 
@@ -25,6 +24,7 @@ class PostDeleteForm(PostBaseForm):
             pass
         return self.instance
 
+
 class CommentDeleteForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -32,9 +32,6 @@ class CommentDeleteForm(forms.ModelForm):
 
     def save(self, commit=True):
         if commit:
-            # self.instance.comments.clear()
-            # SupportPost.objects.filter(id=self.instance.id).delete()
-            # Comment.objects.filter(post_id=self.instance.id).delete()
             Reply.objects.filter(comment=self.instance.id).delete()
 
             self.instance.delete()
@@ -50,25 +47,17 @@ class ReplyDeleteForm(forms.ModelForm):
 
     def save(self, commit=True):
         if commit:
-            # self.instance.comments.clear()
-            # SupportPost.objects.filter(id=self.instance.id).delete()
-            # Comment.objects.filter(post_id=self.instance.id).delete()
-            # Reply.objects.filter(comment=self.instance.id).delete()
-
             self.instance.delete()
         else:
             pass
         return self.instance
 
 
-
 class PostEditForm(PostBaseForm):
     pass
-    # class Meta:
-    #     model = Post
-    #     exclude = ('publication_date', 'photo')
-class CommentForm(forms.ModelForm):
 
+
+class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('text',)
@@ -78,6 +67,7 @@ class CommentForm(forms.ModelForm):
                     'placeholder': 'Add a comment...',
                 }
             )}
+
 
 class CommentEditForm(forms.ModelForm):
     class Meta:
@@ -89,6 +79,7 @@ class ReplyEditForm(forms.ModelForm):
     class Meta:
         model = Reply
         fields = ('text',)
+
 
 class ReplyForm(forms.ModelForm):
     class Meta:

@@ -29,9 +29,9 @@ class DeleteProfileForm(forms.ModelForm):
 
         return self.instance
 
+
 class ConfirmPasswordForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput())
-
 
     def clean(self):
         cleaned_data = super(ConfirmPasswordForm, self).clean()
@@ -45,6 +45,7 @@ class ConfirmPasswordForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
 
 class UserCreateForm(UserCreationForm):
     class Meta:
@@ -61,6 +62,7 @@ class AdminUserCreateForm(UserCreationForm):
                   'password1', 'password2')
 
         is_admin = forms.BooleanField(label="I confirm I am an admin.")
+
 
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -79,19 +81,3 @@ class UserLoginForm(AuthenticationForm):
             raise forms.ValidationError("Invalid username!")
         return username
 
-    # def clean_password(self, *args, **kwargs):
-    #     password = self.cleaned_data['password']
-        # if check_password(password, request.user.password):
-
-
-
-
-#
-# class AdminUserLoginForm(AuthenticationForm):
-#     username = UsernameField(
-#         widget=forms.TextInput(attrs={'placeholder': 'Username'})
-#     )
-#     password = forms.CharField(
-#         strip=False,
-#         widget=forms.PasswordInput(attrs={'placeholder': 'Password'})
-#     )

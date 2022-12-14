@@ -19,25 +19,15 @@
                         <label for="">Card number:</label>
                         {{ form.card_number.errors }}
                         {{ form.card_number }}
-                        {#            <input#}
-                        {#              type="tel"#}
-                        {#              inputmode="numeric"#}
-                        {#              pattern="[0-9\s]{13,19}"#}
-                        {#              autocomplete="cc-number"#}
-                        {#              maxlength="19"#}
-                        {#              placeholder="xxxx xxxx xxxx xxxx"#}
-                        {#            />#}
                     </div>
                     <div class="form-item">
                         <label for="">CVV:</label>
                         {{ form.card_cvv.errors }}
                         {{ form.card_cvv }}
-                        {#            <input type="text" />#}
                     </div>
                     <div class="form-item">
 
                         <label for="">Card expiration date:</label>
-                        {#            <input type="date" />#}
                         {{ form.card_expiry_date.errors }}
                         {{ form.card_expiry_date }}
                     </div>

@@ -28,19 +28,12 @@
             <a href="" class="replies-link" data-bs-toggle="collapse" data-bs-target="#replies" >
               Replies ({{ comment.reply_set.count }})
             </a>
-{#              <a href="" class="replies-link" onClick={handleClickReplies}>#}
-{#              Reply#}
-{#            </a>#}
           </p>
         <form
               action="{% url 'reply to comment' post_id=post.id comment_id=comment.pk %}"
               class="reply-form"
               method="post"
             >
-{#              <input#}
-{#                placeholder="Add a reply..."#}
-{##}
-{#              />#}
                 {{ reply_form.text }}
                 {% csrf_token %}
               <div class="post-actions">

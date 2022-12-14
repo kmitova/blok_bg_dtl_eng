@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect
 
@@ -37,8 +36,6 @@ def inbox_page(request):
 
         for message in messages:
             print(message['unread'])
-            # if message['user'].username == active_direct:
-            #     message['unread'] = 0
 
         context = {
             'directs': directs,
@@ -70,12 +67,6 @@ def chat_page(request, username):
     directs = ChatMessage.objects.filter(user=user, recipient__username=username)
     directs.update(is_read=True)
     recipient = UserModel.objects.filter(username=username).get()
-
-    # if messages:
-    #     message = messages[0]
-    #     active_direct = message['user'].username
-    #     directs = ChatMessage.objects.filter(user=user, recipient=message['user'])
-    #     directs.update(is_read=True)
 
     for message in messages:
         if message['user'].username == username:

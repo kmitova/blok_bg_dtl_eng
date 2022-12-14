@@ -22,34 +22,34 @@
 
 {% include 'partials/footer.html' %}
 <script src="{% static 'scripts/app.js' %}">
-
-    // profile menu
-    console.log(document.getElementById('profile-icon'))
-    document.getElementById('profile-icon').addEventListener('click', () => {
-        console.log('from func')
-        document.getElementById('profile-choices').style.display = 'block'
-    })
-    document.getElementById('profile-menu-close').addEventListener('click', () => {
-        console.log('from func2')
-        document.getElementById('profile-choices').style.display = 'none'
-    })
-
-    document.getElementById('header-hamburger-menu').addEventListener('click', () => {
-        document.getElementById('icons').style.display = 'flex'
-    })
-
-    document.getElementById('users-btn').addEventListener('click', () => {
-        document.getElementById('users-list').style.display = 'block'
-    })
-
-    document.getElementById('close-icons-menu').addEventListener('click', () => {
-        let width = window.matchMedia("(max-width: 1000px)")
-        if (width.matches) {
-            document.getElementById('icons').style.display = 'none'
-        } else {
-            document.getElementById('icons').style.display = 'block'
-        }
-    })
+{##}
+{#    // profile menu#}
+{#    console.log(document.getElementById('profile-icon'))#}
+{#    document.getElementById('profile-icon').addEventListener('click', () => {#}
+{#        console.log('from func')#}
+{#        document.getElementById('profile-choices').style.display = 'block'#}
+{#    })#}
+{#    document.getElementById('profile-menu-close').addEventListener('click', () => {#}
+{#        console.log('from func2')#}
+{#        document.getElementById('profile-choices').style.display = 'none'#}
+{#    })#}
+{##}
+{#    document.getElementById('header-hamburger-menu').addEventListener('click', () => {#}
+{#        document.getElementById('icons').style.display = 'flex'#}
+{#    })#}
+{##}
+{#    document.getElementById('users-btn').addEventListener('click', () => {#}
+{#        document.getElementById('users-list').style.display = 'block'#}
+{#    })#}
+{##}
+{#    document.getElementById('close-icons-menu').addEventListener('click', () => {#}
+{#        let width = window.matchMedia("(max-width: 1000px)")#}
+{#        if (width.matches) {#}
+{#            document.getElementById('icons').style.display = 'none'#}
+{#        } else {#}
+{#            document.getElementById('icons').style.display = 'block'#}
+{#        }#}
+{#    })#}
 
 </script>
 </body>

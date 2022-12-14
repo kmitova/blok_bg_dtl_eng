@@ -21,24 +21,6 @@
 
           </div>
             {% endfor %}
-{#          <div class="chat-message chat-right">#}
-{#            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" className="chat-sender-img"/>#}
-{#            <div class="chat-message-content-div">#}
-{#              <p class="chat-message-content">This is a chat message...</p>#}
-{#              <p class="name-of-chat-sender">You</p>#}
-{#            <p class="time-of-chat-sent">11:23am</p>#}
-{##}
-{#            </div>#}
-{#          </div>#}
-{#          <div class="chat-message chat-left">#}
-{#            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="" className="chat-sender-img"/>#}
-{#            <div class="chat-message-content-div">#}
-{#              <p class="chat-message-content">This is a chat message...</p>#}
-{#              <p class="name-of-chat-sender">John Doe</p>#}
-{#            <p class="time-of-chat-sent">11:23am</p>#}
-{##}
-{#            </div>#}
-{#          </div>#}
         </div>
         <form action="{% url 'send message' %}" class='type-box' method="post">
             {% csrf_token %}

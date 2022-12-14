@@ -12,41 +12,33 @@
             <label For="first-name">First Name:</label>
             {{ form.first_name.errors }}
             {{ form.first_name }}
-{#          <input type="text" value="John" />#}
         </div>
         <div class="item">
           <label for="last-name">Last Name:</label>
-{#          <input type="text" value="Doe" />#}
             {{ form.last_name.errors }}
             {{ form.last_name }}
         </div>
           <div class="item">
           <label for="apartment-number">Apartment Number:</label>
-{#          <input type="text" value="Doe" />#}
             {{ form.apartment_number }}
         </div>
         <div class="item">
           <label for="username">Username:</label>
             {{ form.username.errors }}
             {{ form.username }}
-{#          <input type="text" value="johndoe" />#}
         </div>
         <div class="item">
           <label for="email">Email:</label>
             {{ form.email.errors }}
             {{ form.email }}
-{#          <input type="email" value="johndoe@mail.com" />#}
         </div>
           <div class="item">
           <label for="profile-picture">Profile Picture:</label>
             {{ form.profile_picture }}
-{#          <input type="email" value="johndoe@mail.com" />#}
         </div>
         <div class="item">
           <label for="password">Password:</label>
-{#            {{ form.password }}#}
             <a href="{% url 'change password' pk=object.pk %}">Change password</a>
-{#          <input type="text" value="password" />#}
         </div>
         <button class="save-btn">Save Changes</button>
       </form>

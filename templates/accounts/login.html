@@ -8,22 +8,16 @@
     <h1 class="accounts-form-title">Sign In</h1>
     <form action="{% url 'login' %}" method="post" class="account-form login-form">
         {% csrf_token %}
-{#        {{ form }}#}
     <div class="form-field">
-{#        {{ form.errors }}#}
-{#            <input type="text" id="username" placeholder="Username" required>#}
             {{ form.username.errors }}
             {{ form.username }}
         </div>
     <div class="form-field">
-{#            <input type="password" id="password" placeholder="Password" required>#}
         {{ form.password.errors }}
-{#        {% for error in form.password.errors %} {{ error }} {% endfor %}#}
         {{ form.password }}
     </div>
         <div class="submit-btn-container">
                 <button type="submit" class="accounts-form-btn register-btn">Sign In</button>
-
         </div>
     </form>
     </div>

@@ -12,5 +12,6 @@ def about_page(request):
 def t_and_c_page(request):
     return render(request, 'common/t-and-c.html')
 
+
 def privacy_page(request):
     return render(request, 'common/privacy.html')

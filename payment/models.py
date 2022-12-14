@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.core import validators, exceptions
 from django.db import models
-import datetime
 
 from core.validators import check_card_date_expiry
 
@@ -27,9 +26,10 @@ class Fee(models.Model):
 
 
 class Payment(models.Model):
+
     CARD_LEN = 16
     CVV_LEN = 3
-    # user, card number, card validity, card cvv
+
     card_number = models.CharField(
         max_length=CARD_LEN,
         validators=(validators.MinLengthValidator(CARD_LEN),),

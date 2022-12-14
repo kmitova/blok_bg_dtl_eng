@@ -1,4 +1,3 @@
-
 from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.db import models
@@ -10,17 +9,6 @@ class AppUser(AbstractUser):
 
     NAME_MAX_LEN = 45
     NAME_MIN_LEN = 2
-
-    # building code validator
-    # admin code validator
-
-    # first_name = models.CharField()
-    # last_name = models.CharField()
-    # email = models.EmailField()
-    # building_code = models.IntegerField()
-    # profile_picture = models.ImageField()
-    # is_admin = models.BooleanField()
-    # admin_code = models.IntegerField()
 
     first_name = models.CharField(
         max_length=NAME_MAX_LEN,
@@ -39,8 +27,6 @@ class AppUser(AbstractUser):
         null=False,
         blank=True
     )
-
-    # is_active = models.BooleanField(default=True)
 
     email = models.EmailField(
         unique=True,

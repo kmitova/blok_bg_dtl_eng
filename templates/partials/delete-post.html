@@ -6,7 +6,6 @@
 <div class="edit-post-form">
         <h2 style="text-align:center">Are you sure you want to delete this post?</h2>
 
-        <!-- Starts Edit Photo Form -->
         <form method="post" action="{% url 'delete post' post_id=post_id %}" enctype="multipart/form-data">
             <div class="item" style="display:none;">
                 {{ form.content }}
@@ -14,18 +13,12 @@
              <div class="item" style="display:none;">
                 {{ form.photo }}
             </div>
-{#            {{ form }}#}
-
-
-            <!-- Edit Photo Button -->
             <div class="edit-btn-div" style="display:flex; align-items: center;">
                 <button class="edit-btn" type="submit" style="margin: auto;">Delete Post</button>
             </div>
 
             {% csrf_token %}
         </form>
-        <!-- End Edit Photo Form -->
-
     </div>
 
 {% endblock %}

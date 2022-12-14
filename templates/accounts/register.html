@@ -9,37 +9,30 @@
     <form action="{% url 'register' %}" method="post" class="account-form login-form">
         {% csrf_token %}
         <div class="form-field">
-{#            <input type="text" id="first-name" placeholder="First name" required>#}
             {{ form.first_name.errors }}
             {{ form.first_name|placeholder:"First Name" }}
         </div>
     <div class="form-field">
-{#            <input type="text" id="last-name" placeholder="Last name" required>#}
         {{ form.last_name.errors }}
         {{ form.last_name|placeholder:"Last Name" }}
         </div>
     <div class="form-field">
-{#            <input type="text" id="username" placeholder="Username" required>#}
         {{ form.username.errors }}
         {{ form.username|placeholder:"Username" }}
         </div>
     <div class="form-field">
-{#            <input type="email" id="email" placeholder="Email" required>#}
         {{ form.email.errors }}
         {{ form.email|placeholder:"Email" }}
         </div>
     <div class="form-field">
-{#            <input type="number" id="building-code" placeholder="Building code" required>#}
         {{ form.building_code.errors }}
         {{ form.building_code|placeholder:"Building Code" }}
         </div>
     <div class="form-field">
-{#            <input type="password" id="password" placeholder="Password" required>#}
         {{ form.password1.errors }}
         {{ form.password1|placeholder:"Password" }}
         </div>
     <div class="form-field">
-{#            <input type="password" id="re_password" placeholder="Confirm password" required>#}
             {{ form.password2.errors }}
         {{ form.password2|placeholder:"Confirm Password" }}
     </div>

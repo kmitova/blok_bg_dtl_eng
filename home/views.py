@@ -3,8 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect
-
-
 from core.utils import get_group_users, get_group_posts
 from home.forms import PostCreateForm, CommentForm, ReplyForm, AnnouncementForm, PostEditForm, PostDeleteForm, \
     CommentEditForm, CommentDeleteForm, ReplyEditForm, ReplyDeleteForm
@@ -88,7 +86,6 @@ def get_unread_notifications(request):
     return context
 
 
-# @login_required
 def get_building_number(request):
     context = {}
     if request.user.is_authenticated:
@@ -175,6 +172,7 @@ def delete_post(request, post_id):
 
     return render(request, 'partials/delete-post.html', context)
 
+
 @login_required
 def delete_comment(request, comment_id):
     comment = Comment.objects.filter(pk=comment_id).get()
@@ -215,6 +213,7 @@ def delete_reply(request, reply_id):
     return render(request, 'partials/delete-reply.html', context)
 
 
+@login_required
 def delete_notification(request, notification_id):
     notification = Notification.objects.filter(pk=notification_id).get()
     notification.delete()
@@ -313,9 +312,6 @@ def support_post(request, post_id):
     post = Post.objects.filter(pk=post_id).get()
     support_object = SupportPost.objects.filter(related_post_id=post_id).first()
 
-    # if support_object:
-    #     support_object.delete()
-    # else:
     support = SupportPost(related_post=post)
     support.save()
     if post.user.pk != request.user.pk:

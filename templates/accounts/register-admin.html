@@ -11,25 +11,20 @@
         <div class="form-field">
             {{ form.first_name.errors }}
             {{ form.first_name|placeholder:"First Name" }}
-{#            <input type="text" id="first-name" placeholder="First name" required>#}
         </div>
     <div class="form-field">
-{#            <input type="text" id="last-name" placeholder="Last name" required>#}
             {{ form.last_name.errors }}
             {{ form.last_name|placeholder:"Last Name" }}
     </div>
     <div class="form-field">
-{#            <input type="text" id="username" placeholder="Username" required>#}
             {{ form.username.errors }}
             {{ form.username|placeholder:"Username" }}
     </div>
     <div class="form-field">
-{#            <input type="email" id="email" placeholder="Email" required>#}
             {{ form.email.errors }}
             {{ form.email|placeholder:"Email" }}
     </div>
     <div class="form-field">
-{#            <input type="number" id="building-code" placeholder="Building code" required>#}
             {{ form.building_code.errors }}
             {{ form.building_code|placeholder:"Building Code" }}
 
@@ -37,22 +32,18 @@
 
         <div class="form-field">
             {{ form.admin_code|placeholder:'Admin Code' }}
-{#            <input type="number" id="admin-code" placeholder="Admin code" required>#}
         </div>
     <div class="form-field">
             {{ form.password1.errors }}
             {{ form.password1|placeholder:"Password" }}
-{#            <input type="password" id="password" placeholder="Password" required>#}
         </div>
     <div class="form-field">
             {{ form.password2.errors }}
         {{ form.password2|placeholder:"Confirm Password" }}
-{#            <input type="password" id="re_password" placeholder="Confirm password" required>#}
         </div>
         <div class="form-field">
             {{ form.is_admin.label_tag }}
             {{ form.is_admin}}
-{#            <input type="number" id="admin-code" placeholder="Admin code" required>#}
         </div>
         <div class="submit-btn-container">
                 <button type="submit" class="accounts-form-btn register-btn">Sign Up</button>

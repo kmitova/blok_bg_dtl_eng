@@ -1,5 +1,3 @@
-
-
 from django.contrib import admin
 
 from home.models import Post, Comment, Reply, SupportPost, Notification, Announcement
@@ -11,7 +9,6 @@ LIST_FILTER = ('publication_date', 'user')
 class PostAdmin(admin.ModelAdmin):
     list_display = ('publication_date', 'user')
     list_filter = LIST_FILTER
-
 
 
 @admin.register(Comment)
