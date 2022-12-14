@@ -1,6 +1,8 @@
 import datetime
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
@@ -14,13 +16,14 @@ from payment.models import Fee
 UserModel = get_user_model()
 
 
-class SetPaymentView(views.CreateView):
+class SetPaymentView(LoginRequiredMixin, views.CreateView):
     model = UserModel
     form_class = SetFeeForm
     template_name = 'payment/set-payment.html'
     success_url = reverse_lazy('home page')
 
 
+@login_required
 def pay_page(request):
     if request.method == "GET":
         form = PaymentForm()

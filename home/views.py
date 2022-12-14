@@ -57,6 +57,7 @@ def posts_page(request):
     return render(request, 'partials/posts.html', context)
 
 
+@login_required
 def notifications_page(request):
     notifications = Notification.objects.filter(user=request.user).order_by("-date")
     paginator = Paginator(notifications, 10)
