@@ -81,7 +81,7 @@ class DeleteProfileView(UpdateView):
         return self.request.user
 
 
-def change_password(request):
+def change_password(request, pk):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
