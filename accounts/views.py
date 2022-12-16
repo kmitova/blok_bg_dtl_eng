@@ -28,7 +28,7 @@ class AdminUserRegisterView(views.CreateView):
     model = UserModel
     form_class = AdminUserCreateForm
     template_name = 'accounts/register-admin.html'
-    success_url = reverse_lazy('login admin')
+    success_url = reverse_lazy('login')
 
 
 class UserLoginView(auth_views.LoginView):
